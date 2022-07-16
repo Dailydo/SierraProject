@@ -16,6 +16,7 @@ public class WorldComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_grid.InitCells();
         InstantiateCharacter();
         InitVictoryText();
     }
@@ -28,11 +29,9 @@ public class WorldComponent : MonoBehaviour
             m_characterInstance = characterGO.GetComponent<CharacterComponent>();
             m_characterInstance.transform.parent = transform;
 
-            int posX;
-            int posY;
-            Cell cell = m_grid.GetSpecificCell(ECellEffect.PlayerSpawnPoint, out posX, out posY);
+            Cell cell = m_grid.GetSpecificCell(ECellEffect.PlayerSpawnPoint);
             if (cell != null)
-                SetCharacterPos(posX, posY);
+                SetCharacterPos(cell.PosX, cell.PosY);
         }
         else
         {

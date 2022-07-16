@@ -25,7 +25,7 @@ public class GridComponent : MonoBehaviour
         get { return m_height; }
     }
 
-    void Awake()
+    private void Awake()
     {
         if (m_cells == null)
         {
@@ -33,7 +33,20 @@ public class GridComponent : MonoBehaviour
         }
     }
 
-    void Update()
+    public void InitCells()
+    {
+        for (int i = 0; i < m_width; ++i)
+        {
+            for (int j = 0; j < m_height; ++j)
+            {
+                Cell cell = GetCell(i, j);
+                if (cell != null)
+                    cell.Init(i, j);
+            }
+        }
+    }
+
+    private void Update()
     {
         if (m_cells != null)
         {
@@ -86,22 +99,12 @@ public class GridComponent : MonoBehaviour
         return x >= 0 && x < m_width && y >= 0 && y < m_height;
     }
 
-    public Cell GetSpecificCell(ECellEffect effect, out int x, out int y)
+    public Cell GetSpecificCell(ECellEffect effect)
     {
-        x = 0;
-        y = 0;
-        for (int i = 0; i < m_width; ++i)
+        for (int i = 0; i < m_cells.Length; ++i)
         {
-            for (int j = 0; j < m_height; ++j)
-            {
-                Cell cell = GetCell(i, j);
-                if (cell != null && cell.Effect == effect)
-                {
-                    x = i;
-                    y = j;
-                    return cell;
-                }
-            }
+            if (m_cells[i].Effect == effect)
+                return m_cells[i];
         }
         return null;
     }
