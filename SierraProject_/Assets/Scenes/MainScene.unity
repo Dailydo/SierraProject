@@ -16051,6 +16051,7 @@ MonoBehaviour:
   m_cellDebugTextPrefab: {fileID: 1382448948823928842, guid: 68969afc95e87b444a55798779d576b3, type: 3}
   m_canvasGO: {fileID: 122072454}
   m_instantiateDebugText: 0
+  m_renderGridDebug: 1
 --- !u!1001 &2144156281
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -26,6 +26,9 @@ public class GridComponent : MonoBehaviour
     [SerializeField]
     private bool m_instantiateDebugText = false;
 
+    [SerializeField]
+    private bool m_renderGridDebug = true;
+
     public int Width
     {
         get { return m_width; }
@@ -59,7 +62,7 @@ public class GridComponent : MonoBehaviour
 
     private void Update()
     {
-        if (m_cells != null)
+        if (m_cells != null && m_renderGridDebug)
         {
             for (int x = 0; x <= m_width; ++x)
             {
