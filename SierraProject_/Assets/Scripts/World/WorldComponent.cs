@@ -55,7 +55,13 @@ public class WorldComponent : MonoBehaviour
         int posX = Mathf.Clamp(m_characterInstance.PosX + moveX, 0, m_grid.Width - 1);
         int posY = Mathf.Clamp(m_characterInstance.PosY + moveY, 0, m_grid.Height - 1);
         Cell cell = m_grid.GetCell(posX, posY);
-        if (cell == null || !cell.Walkable)
+        if (cell == null)
+        {
+            Debug.LogWarning("Invalid cell(" + posX.ToString() + ", " + posY.ToString() + ") in grid(" + m_grid.Width.ToString() +", " + m_grid.Height.ToString() + ")");
+            return;
+        }
+
+        if (!cell.Walkable)
             return;
 
         m_characterInstance.transform.position = m_grid.GetWorldPosition(posX, posY);
