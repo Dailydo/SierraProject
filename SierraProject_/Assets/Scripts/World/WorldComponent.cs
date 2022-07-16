@@ -15,6 +15,9 @@ public class WorldComponent : MonoBehaviour
     [SerializeField]
     private GameObject m_victoryTextGO = null;
 
+    [SerializeField]
+    private GameObject m_defeatTextGO = null;
+
     private PlayerComponent m_playerInstance = null;
     private List<EnemyComponent> m_enemiesInstances = new List<EnemyComponent>();
 
@@ -24,6 +27,7 @@ public class WorldComponent : MonoBehaviour
         m_grid.InitCells();
         InstantiatePlayer();
         InitVictoryText();
+        InitDefeatText();
 
         // TEMP test
         InstantiateEnemy();
@@ -69,6 +73,18 @@ public class WorldComponent : MonoBehaviour
         else
         {
             Debug.LogError("No victory text GO filled");
+        }
+    }
+
+    void InitDefeatText()
+    {
+        if (m_defeatTextGO != null)
+        {
+            m_defeatTextGO.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("No defeat text GO filled");
         }
     }
 
@@ -167,6 +183,10 @@ public class WorldComponent : MonoBehaviour
         if (character == m_playerInstance)
         {
             // check cell danger
+            if (cell.IsLetal)
+            {
+                m_defeatTextGO.SetActive(true);
+            }
 
             // check victory condition
             if (cell.Effect == ECellEffect.Victory)
@@ -179,10 +199,11 @@ public class WorldComponent : MonoBehaviour
             // check defeat condition
             if (AreOnSameCell(character, m_playerInstance))
             {
-                Debug.Log("Defeat");
+                m_defeatTextGO.SetActive(true);
             }
 
             // update cell danger
+            cell.IsLetal = true;
         }
     }
 
@@ -191,6 +212,7 @@ public class WorldComponent : MonoBehaviour
         if (character is EnemyComponent)
         {
             // remove cell danger
+            cell.IsLetal = false;
         }
     }
 

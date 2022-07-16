@@ -20,6 +20,7 @@ public class Cell
 
     private int m_posX = 0;
     private int m_posY = 0;
+    private bool m_isLetal = false;
 
     public bool Walkable
     {
@@ -40,6 +41,12 @@ public class Cell
     public int PosY
     {
         get { return m_posY; }
+    }
+
+    public bool IsLetal
+    {
+        get { return m_isLetal; }
+        set { m_isLetal = value; }
     }
 
     public void Init(int posX, int posY)
