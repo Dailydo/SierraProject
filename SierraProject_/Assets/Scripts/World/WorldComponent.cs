@@ -21,6 +21,8 @@ public class WorldComponent : MonoBehaviour
     private PlayerComponent m_playerInstance = null;
     private List<EnemyComponent> m_enemiesInstances = new List<EnemyComponent>();
 
+    private bool m_victory = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,8 @@ public class WorldComponent : MonoBehaviour
         InstantiatePlayer();
         InitVictoryText();
         InitDefeatText();
+
+        m_victory = false;
 
         // TEMP test
         InstantiateEnemy();
@@ -125,6 +129,9 @@ public class WorldComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (m_playerInstance.IsDead || m_victory)
+            return;
+
         UpdateInputs();
         UpdateEnemies();
     }
@@ -211,13 +218,14 @@ public class WorldComponent : MonoBehaviour
             // check cell danger
             if (cell.IsLetal)
             {
-                m_defeatTextGO.SetActive(true);
+                m_playerInstance.TakeDamage();
             }
 
             // check victory condition
             if (cell.Effect == ECellEffect.Victory)
             {
                 m_victoryTextGO.SetActive(true);
+                m_victory = true;
             }
         }
         else
@@ -225,11 +233,17 @@ public class WorldComponent : MonoBehaviour
             // check defeat condition
             if (AreOnSameCell(character, m_playerInstance))
             {
-                m_defeatTextGO.SetActive(true);
+                m_playerInstance.TakeDamage();
             }
 
             // update cell danger
             cell.IsLetal = true;
+        }
+
+        if (m_playerInstance.IsDead)
+        {
+            m_defeatTextGO.SetActive(true);
+            m_playerInstance.gameObject.SetActive(false);
         }
     }
 
