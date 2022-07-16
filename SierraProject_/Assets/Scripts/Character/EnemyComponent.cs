@@ -32,7 +32,7 @@ public class EnemyComponent : CharacterComponent
     {
         base.OnMoveInternal();
 
-        // remove target cell from pathfinding
+        // TODO remove target cell from pathfinding
         m_targetCell = null;
     }
 
@@ -48,14 +48,14 @@ public class EnemyComponent : CharacterComponent
     {
         if (m_target.PosX != m_lastTargetPosX || m_target.PosY != m_lastTargetPosY)
         {
-            // update pathfinding
+            // TODO update pathfinding
 
             m_lastTargetPosX = m_target.PosX;
             m_lastTargetPosY = m_target.PosY;
         }
         else
         {
-            // next cell in pathfinding
+            // TODO next cell in pathfinding
         }
 
         // TEMP random move

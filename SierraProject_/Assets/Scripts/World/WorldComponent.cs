@@ -46,7 +46,7 @@ public class WorldComponent : MonoBehaviour
                 Cell spawnPoint = m_grid.GetSpecificCell(ECellEffect.PlayerSpawnPoint);
                 if (spawnPoint != null)
                 {
-                    SetCharacterPos(m_playerInstance, spawnPoint);
+                    SetCharacterPos(m_playerInstance, spawnPoint, true);
                 }
                 else
                 {
@@ -101,7 +101,7 @@ public class WorldComponent : MonoBehaviour
                 Cell spawnPoint = m_grid.GetSpecificCell(ECellEffect.EnemySpawnPoint);
                 if (spawnPoint != null)
                 {
-                    SetCharacterPos(enemyInstance, spawnPoint);
+                    SetCharacterPos(enemyInstance, spawnPoint, true);
                     enemyInstance.Init(m_grid, m_playerInstance);
                     m_enemiesInstances.Add(enemyInstance);
                 }
@@ -158,8 +158,7 @@ public class WorldComponent : MonoBehaviour
         {
             if (enemy.CanMove())
             {
-                SetCharacterPos(enemy, enemy.TargetCell);
-                enemy.OnMove();
+                SetCharacterPos(enemy, enemy.TargetCell, false);
             }
         }
     }
@@ -184,17 +183,21 @@ public class WorldComponent : MonoBehaviour
         if (!cell.Walkable)
             return;
 
-        SetCharacterPos(m_playerInstance, cell);
-        m_playerInstance.OnMove();
+        SetCharacterPos(m_playerInstance, cell, false);
     }
 
-    void SetCharacterPos(CharacterComponent character, Cell cell)
+    void SetCharacterPos(CharacterComponent character, Cell cell, bool teleport)
     {
         Cell previousCell = m_grid.GetCell(character.PosX, character.PosY);
         if (previousCell != null)
             OnCharacterLeftCell(character, previousCell);
 
-        character.transform.position = m_grid.GetWorldPosition(cell.PosX, cell.PosY);
+        Vector3 targetWorldPos = m_grid.GetWorldPosition(cell.PosX, cell.PosY);
+        if (teleport)
+            character.transform.position = targetWorldPos;
+        else
+            character.MoveTo(targetWorldPos);
+
         character.PosX = cell.PosX;
         character.PosY = cell.PosY;
 
