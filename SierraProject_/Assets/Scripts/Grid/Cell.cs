@@ -4,6 +4,7 @@ using UnityEngine;
 public enum ECellEffect
 {
     None = 0,
+    PlayerSpawnPoint,
     Victory,
     Trap
 }

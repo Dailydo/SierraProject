@@ -70,7 +70,7 @@ public class GridComponent : MonoBehaviour
         if (!IsValidPosition(x, y))
             return null;
 
-        return m_cells[x + y * m_height];
+        return m_cells[x + y * m_width];
     }
 
     public Vector3 GetWorldPosition(int x, int y)
@@ -84,6 +84,26 @@ public class GridComponent : MonoBehaviour
     public bool IsValidPosition(int x, int y)
     {
         return x >= 0 && x < m_width && y >= 0 && y < m_height;
+    }
+
+    public Cell GetSpecificCell(ECellEffect effect, out int x, out int y)
+    {
+        x = 0;
+        y = 0;
+        for (int i = 0; i < m_width; ++i)
+        {
+            for (int j = 0; j < m_height; ++j)
+            {
+                Cell cell = GetCell(i, j);
+                if (cell != null && cell.Effect == effect)
+                {
+                    x = i;
+                    y = j;
+                    return cell;
+                }
+            }
+        }
+        return null;
     }
 
     private Vector3 GetCellPosition(int x, int y)

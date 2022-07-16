@@ -16,18 +16,32 @@ public class WorldComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InstantiateCharacter();
+        InitVictoryText();
+    }
+
+    void InstantiateCharacter()
+    {
         GameObject characterGO = Instantiate<GameObject>(m_characterPrefab);
         if (characterGO != null)
         {
             m_characterInstance = characterGO.GetComponent<CharacterComponent>();
-            m_characterInstance.transform.position = m_grid.GetWorldPosition(0, 0);
             m_characterInstance.transform.parent = transform;
+
+            int posX;
+            int posY;
+            Cell cell = m_grid.GetSpecificCell(ECellEffect.PlayerSpawnPoint, out posX, out posY);
+            if (cell != null)
+                SetCharacterPos(posX, posY);
         }
         else
         {
             Debug.LogError("Cannot instantiate character prefab");
         }
+    }
 
+    void InitVictoryText()
+    {
         if (m_victoryTextGO != null)
         {
             m_victoryTextGO.SetActive(false);
@@ -79,16 +93,20 @@ public class WorldComponent : MonoBehaviour
         if (!cell.Walkable)
             return;
 
-        m_characterInstance.transform.position = m_grid.GetWorldPosition(posX, posY);
-        m_characterInstance.PosX = posX;
-        m_characterInstance.PosY = posY;
-
+        SetCharacterPos(posX, posY);
         OnCharacterEnteredCell(cell);
     }
 
-    void OnCharacterEnteredCell(Cell _cell)
+    void SetCharacterPos(int posX, int posY)
     {
-        if (_cell.Effect == ECellEffect.Victory)
+        m_characterInstance.transform.position = m_grid.GetWorldPosition(posX, posY);
+        m_characterInstance.PosX = posX;
+        m_characterInstance.PosY = posY;
+    }
+
+    void OnCharacterEnteredCell(Cell cell)
+    {
+        if (cell.Effect == ECellEffect.Victory)
         {
             m_victoryTextGO.SetActive(true);
         }
