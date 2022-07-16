@@ -129,7 +129,6 @@ public class WorldComponent : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (m_playerInstance.IsDead || m_victory)
@@ -257,6 +256,12 @@ public class WorldComponent : MonoBehaviour
             // remove cell danger
             cell.IsLetal = false;
         }
+    }
+
+    private void LateUpdate()
+    {
+        Vector3 playerPosition = m_playerInstance.transform.position;
+        m_cameraTransform.position = new Vector3(playerPosition.x, playerPosition.y, m_cameraTransform.position.z);
     }
 
     bool AreOnSameCell(CharacterComponent character, CharacterComponent other)
