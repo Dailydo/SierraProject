@@ -97,10 +97,120 @@ public class GridPainterComponent : MonoBehaviour
 
     private void ProcessHorizontalPaintRequest()
     {
+        if (m_gridToProcess != null)
+        {
+            foreach(LinePaintingRequest line in m_horizontalRequestList)
+            {
+                if (line.m_startCellIndex >= 0 && line.m_endCellIndex >= 0)
+                {
+                    int finalYIndex = -1;
+                    int finalXStartIndex = -1;
+                    int finalXEndIndex = -1;
+
+                    int startXIndex = -1;
+                    int startYIndex = -1;
+                    int endXIndex = -1;
+                    int endYIndex = -1;
+                    if(m_gridToProcess.GetCellXYIndexFromGlobalIndex(line.m_startCellIndex, out startXIndex, out startYIndex) && m_gridToProcess.GetCellXYIndexFromGlobalIndex(line.m_endCellIndex, out endXIndex, out endYIndex))
+                    {
+                        Debug.Log("Horinzontal Line Start X " + startXIndex + " Y " + startYIndex);
+                        Debug.Log("Horinzontal Line End X " + endXIndex + " Y " + endYIndex);
+
+                        if(startYIndex == endYIndex)
+                        {
+                            finalYIndex = startYIndex;
+                            if (startXIndex < endXIndex)
+                            {
+                                finalXStartIndex = startXIndex;
+                                finalXEndIndex = endXIndex;
+                            }
+                            else
+                            {
+                                finalXStartIndex = endXIndex;
+                                finalXEndIndex = startXIndex;    
+                            }
+                        }
+                    }
+
+                    if (finalYIndex >= 0)
+                    {
+                        Debug.Log("Final Horinzontal Line Start X " + finalXStartIndex + " End X " + finalXEndIndex + " Y " + endYIndex);
+                        for(int x = finalXStartIndex; x <= finalXEndIndex; ++x)
+                        {
+                            Cell cell = m_gridToProcess.GetCell(x, finalYIndex);
+                            if (cell != null)
+                            {
+                                PaintCell(cell, line.m_paintType);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // ERROR
+                        Debug.Log("Error with line " + line.m_startCellIndex + " " + line.m_endCellIndex);
+                    }
+                }
+            }
+        }
     }
 
     private void ProcessVerticalPaintRequest()
     {
+        if (m_gridToProcess != null)
+        {
+            foreach(LinePaintingRequest line in m_verticalRequestList)
+            {
+                if (line.m_startCellIndex >= 0 && line.m_endCellIndex >= 0)
+                {
+                    int finalXIndex = -1;
+                    int finalYStartIndex = -1;
+                    int finalYEndIndex = -1;
+
+                    int startXIndex = -1;
+                    int startYIndex = -1;
+                    int endXIndex = -1;
+                    int endYIndex = -1;
+                    if(m_gridToProcess.GetCellXYIndexFromGlobalIndex(line.m_startCellIndex, out startXIndex, out startYIndex) && m_gridToProcess.GetCellXYIndexFromGlobalIndex(line.m_endCellIndex, out endXIndex, out endYIndex))
+                    {
+                        Debug.Log("Vertical Line Start X " + startXIndex + " Y " + startYIndex);
+                        Debug.Log("Vertical Line End X " + endXIndex + " Y " + endYIndex);
+
+                        if(startXIndex == endXIndex)
+                        {
+                            finalXIndex = startXIndex;
+                            if (startYIndex < endYIndex)
+                            {
+                                finalYStartIndex = startYIndex;
+                                finalYEndIndex = endYIndex;
+                            }
+                            else
+                            {
+                                finalYStartIndex = endYIndex;
+                                finalYEndIndex = startYIndex;    
+                            } 
+                        }
+                    }
+
+                    if (finalXIndex >= 0)
+                    {
+                        Debug.Log("Final Vertical Line X " + finalXIndex + " Start Y " + finalYStartIndex + " End Y " + finalYEndIndex);
+                        for(int y = finalYStartIndex; y <= finalYEndIndex; ++y)
+                        {
+                            Cell cell = m_gridToProcess.GetCell(finalXIndex, y);
+                            if (cell != null)
+                            {
+                                PaintCell(cell, line.m_paintType);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // ERROR
+                        Debug.Log("Error with line " + line.m_startCellIndex + " " + line.m_endCellIndex);
+                    }
+                }
+            }
+        }
     }
 
     private void PaintCell(Cell cell, EPaintType paintType)
