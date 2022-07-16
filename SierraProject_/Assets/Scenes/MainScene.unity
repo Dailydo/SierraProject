@@ -2433,7 +2433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1728a64e2be8b845b4a2b2d0443f381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterPrefab: {fileID: 6586637111690868608, guid: 4c5611a387aeca94baf19883644c6024, type: 3}
+  m_playerPrefab: {fileID: 6586637111690868608, guid: 4c5611a387aeca94baf19883644c6024, type: 3}
   m_grid: {fileID: 2091455911}
   m_victoryTextGO: {fileID: 2078564259}
 --- !u!1 &2078564259

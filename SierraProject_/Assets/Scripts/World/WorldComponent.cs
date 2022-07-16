@@ -3,7 +3,7 @@ using UnityEngine;
 public class WorldComponent : MonoBehaviour
 {
     [SerializeField]
-    private GameObject m_characterPrefab = null;
+    private GameObject m_playerPrefab = null;
 
     [SerializeField]
     private GridComponent m_grid = null;
@@ -11,27 +11,27 @@ public class WorldComponent : MonoBehaviour
     [SerializeField]
     private GameObject m_victoryTextGO = null;
 
-    private CharacterComponent m_characterInstance = null;
+    private PlayerComponent m_playerInstance = null;
 
     // Start is called before the first frame update
     void Start()
     {
         m_grid.InitCells();
-        InstantiateCharacter();
+        InstantiatePlayer();
         InitVictoryText();
     }
 
-    void InstantiateCharacter()
+    void InstantiatePlayer()
     {
-        GameObject characterGO = Instantiate<GameObject>(m_characterPrefab);
+        GameObject characterGO = Instantiate<GameObject>(m_playerPrefab);
         if (characterGO != null)
         {
-            m_characterInstance = characterGO.GetComponent<CharacterComponent>();
-            m_characterInstance.transform.parent = transform;
+            m_playerInstance = characterGO.GetComponent<PlayerComponent>();
+            m_playerInstance.transform.parent = transform;
 
             Cell cell = m_grid.GetSpecificCell(ECellEffect.PlayerSpawnPoint);
             if (cell != null)
-                SetCharacterPos(cell.PosX, cell.PosY);
+                SetCharacterPos(m_playerInstance, cell.PosX, cell.PosY);
         }
         else
         {
@@ -56,30 +56,30 @@ public class WorldComponent : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            MoveCharacter(-1, 0);
+            MovePlayer(-1, 0);
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            MoveCharacter(1, 0);
+            MovePlayer(1, 0);
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            MoveCharacter(0, 1);
+            MovePlayer(0, 1);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            MoveCharacter(0, -1);
+            MovePlayer(0, -1);
         }
     }
 
-    void MoveCharacter(int moveX, int moveY)
+    void MovePlayer(int moveX, int moveY)
     {
-        int posX = Mathf.Clamp(m_characterInstance.PosX + moveX, 0, m_grid.Width - 1);
-        int posY = Mathf.Clamp(m_characterInstance.PosY + moveY, 0, m_grid.Height - 1);
-        if (posX == m_characterInstance.PosX && posY == m_characterInstance.PosY)
+        int posX = Mathf.Clamp(m_playerInstance.PosX + moveX, 0, m_grid.Width - 1);
+        int posY = Mathf.Clamp(m_playerInstance.PosY + moveY, 0, m_grid.Height - 1);
+        if (posX == m_playerInstance.PosX && posY == m_playerInstance.PosY)
             return;
 
         Cell cell = m_grid.GetCell(posX, posY);
@@ -92,15 +92,15 @@ public class WorldComponent : MonoBehaviour
         if (!cell.Walkable)
             return;
 
-        SetCharacterPos(posX, posY);
+        SetCharacterPos(m_playerInstance, posX, posY);
         OnCharacterEnteredCell(cell);
     }
 
-    void SetCharacterPos(int posX, int posY)
+    void SetCharacterPos(CharacterComponent character, int posX, int posY)
     {
-        m_characterInstance.transform.position = m_grid.GetWorldPosition(posX, posY);
-        m_characterInstance.PosX = posX;
-        m_characterInstance.PosY = posY;
+        character.transform.position = m_grid.GetWorldPosition(posX, posY);
+        character.PosX = posX;
+        character.PosY = posY;
     }
 
     void OnCharacterEnteredCell(Cell cell)
