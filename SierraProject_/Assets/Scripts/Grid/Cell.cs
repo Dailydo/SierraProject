@@ -19,4 +19,9 @@ public class Cell
         }
     }
 
+    public bool IsWalkable()
+    {
+        return m_walkable;
+    }
+
 }

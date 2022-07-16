@@ -50,6 +50,16 @@ public class GridComponent : MonoBehaviour
                     {
                         Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, Time.deltaTime);
                     }
+
+                    if (x + 1 < m_width && y + 1 < m_height)
+                    {
+                        Cell cell = GetCell(x, y);
+                        if (cell != null && !cell.IsWalkable())
+                        {
+                            Debug.DrawLine(GetWorldPosition(x, y + 1), GetWorldPosition(x + 1, y), Color.red, Time.deltaTime);
+                            Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y + 1), Color.red, Time.deltaTime);
+                        }
+                    }
                 }
             }  
         }
