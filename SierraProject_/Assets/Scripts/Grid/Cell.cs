@@ -6,17 +6,17 @@ public enum ECellEffect
     None = 0,
     PlayerSpawnPoint,
     Victory,
-    EnemySpawnPoint
+    EnemySpawnPoint,
+    Obstacle,
 }
 
 [Serializable]
 public class Cell
 {
     [SerializeField]
-    private bool m_walkable = true;
-
-    [SerializeField]
     private ECellEffect m_effect = ECellEffect.None;
+
+    private IngredientComponent m_innerIngredient = null;
 
     private int m_posX = 0;
     private int m_posY = 0;
@@ -24,13 +24,19 @@ public class Cell
 
     public bool Walkable
     {
-        get { return m_walkable; }
-        set { m_walkable = value; }
+        get { return Effect != ECellEffect.Obstacle; }
     }
 
     public ECellEffect Effect
     {
-        get { return m_effect; }
+        get
+        {
+            if (m_innerIngredient != null && m_innerIngredient.GetCellEffect() != ECellEffect.None)
+                return m_innerIngredient.GetCellEffect();
+
+            return m_effect;
+        }
+        set { m_effect = value; }
     }
 
     public int PosX
@@ -49,10 +55,15 @@ public class Cell
         set { m_isLetal = value; }
     }
 
+    public IngredientComponent InnerIngredient
+    {
+        get { return m_innerIngredient; }
+        set { m_innerIngredient = value; }
+    }
+
     public void Init(int posX, int posY)
     {
         m_posX = posX;
         m_posY = posY;
     }
-
 }

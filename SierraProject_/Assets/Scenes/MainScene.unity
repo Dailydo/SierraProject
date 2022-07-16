@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -604,6 +604,7 @@ RectTransform:
   m_Children:
   - {fileID: 2078564260}
   - {fileID: 2036092803}
+  - {fileID: 122072455}
   m_Father: {fileID: 547241251}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -673,6 +674,42 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 10
   m_TargetDisplay: 0
+--- !u!1 &122072454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 122072455}
+  m_Layer: 5
+  m_Name: CellsDebugTexts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &122072455
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122072454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 116491133}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &141445964
 GameObject:
   m_ObjectHideFlags: 0
@@ -13026,6 +13063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerPrefab: {fileID: 6586637111690868608, guid: 4c5611a387aeca94baf19883644c6024, type: 3}
   m_enemyPrefab: {fileID: 6586637111690868608, guid: b9be3c17903b8774283e540bb2011f8a, type: 3}
+  m_cameraTransform: {fileID: 0}
   m_grid: {fileID: 2091455911}
   m_victoryTextGO: {fileID: 2078564259}
   m_defeatTextGO: {fileID: 2036092802}
@@ -13091,6 +13129,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1377144046016234242, guid: b95cc2130428aa7489948e54cd70224e, type: 3}
   m_PrefabInstance: {fileID: 672509228}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &739326168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 739326170}
+  - component: {fileID: 739326169}
+  m_Layer: 0
+  m_Name: GridPainter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &739326169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739326168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbbeb183e5e5e4747b699d1f146189c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gridToProcess: {fileID: 2091455911}
+  m_allRequest:
+    m_paintAll: 1
+    m_paintType: 0
+  m_unitRequestList: []
+  m_horizontalRequestList: []
+  m_verticalRequestList: []
+--- !u!4 &739326170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739326168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.14577475, y: 0.019826308, z: 0.000062942505}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &744089002
 GameObject:
   m_ObjectHideFlags: 0
@@ -14145,8 +14234,8 @@ Transform:
   - {fileID: 744089003}
   - {fileID: 339557615}
   - {fileID: 263534206}
-  - {fileID: 898848038}
   - {fileID: 2144156282}
+  - {fileID: 898848038}
   m_Father: {fileID: 13038380}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14167,7 +14256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2036092803
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14302,7 +14391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2078564260
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14437,7 +14526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2091455910
 Transform:
   m_ObjectHideFlags: 0
@@ -14446,7 +14535,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091455908}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: -5, z: 0}
+  m_LocalPosition: {x: -9, y: -12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14466,269 +14555,1497 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_cells:
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 1
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 2
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 3
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
   m_cellSize: 1
-  m_width: 13
-  m_height: 10
+  m_width: 55
+  m_height: 27
+  m_cellDebugTextPrefab: {fileID: 1382448948823928842, guid: 68969afc95e87b444a55798779d576b3, type: 3}
+  m_canvasGO: {fileID: 122072454}
+  m_instantiateDebugText: 0
 --- !u!1001 &2144156281
 PrefabInstance:
   m_ObjectHideFlags: 0

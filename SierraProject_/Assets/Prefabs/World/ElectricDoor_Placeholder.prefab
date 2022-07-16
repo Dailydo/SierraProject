@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4706735927845445562}
   - component: {fileID: 7338026024325324947}
+  - component: {fileID: 4419880137322274127}
   m_Layer: 0
   m_Name: ElectricDoor_Placeholder
   m_TagString: Untagged
@@ -84,3 +85,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4419880137322274127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7120815459914206359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9936c38312d71144b819a5088be45f43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
