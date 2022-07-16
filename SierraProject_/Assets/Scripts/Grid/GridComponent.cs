@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
@@ -84,6 +85,28 @@ public class GridComponent : MonoBehaviour
             return null;
 
         return m_cells[x + y * m_width];
+    }
+
+    public List<Cell> GetWalkableNeighbours(int x, int y)
+    {
+        List<Cell> neighbours = new List<Cell>();
+        Cell neighbour = GetCell(x + 1, y);
+        if (neighbour != null && neighbour.Walkable)
+            neighbours.Add(neighbour);
+
+        neighbour = GetCell(x - 1, y);
+        if (neighbour != null && neighbour.Walkable)
+            neighbours.Add(neighbour);
+
+        neighbour = GetCell(x, y + 1);
+        if (neighbour != null && neighbour.Walkable)
+            neighbours.Add(neighbour);
+
+        neighbour = GetCell(x, y - 1);
+        if (neighbour != null && neighbour.Walkable)
+            neighbours.Add(neighbour);
+
+        return neighbours;
     }
 
     public Vector3 GetWorldPosition(int x, int y)
