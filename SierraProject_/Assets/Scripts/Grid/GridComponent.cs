@@ -37,16 +37,16 @@ public class GridComponent : MonoBehaviour
     {
         if (m_cells != null)
         {
-            for (int x = 0; x < m_width; ++x)
+            for (int x = 0; x <= m_width; ++x)
             {
-                for (int y = 0; y < m_height; ++y)
+                for (int y = 0; y <= m_height; ++y)
                 {
-                    if (y + 1 < m_height)
+                    if (y + 1 <= m_height)
                     {
                         Debug.DrawLine(GetCellPosition(x, y), GetCellPosition(x, y + 1), Color.white, Time.deltaTime);
                     }
 
-                    if (x + 1 < m_width)
+                    if (x + 1 <= m_width)
                     {
                         Debug.DrawLine(GetCellPosition(x, y), GetCellPosition(x + 1, y), Color.white, Time.deltaTime);
                     }
