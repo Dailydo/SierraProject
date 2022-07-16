@@ -102,6 +102,7 @@ public class WorldComponent : MonoBehaviour
                 if (spawnPoint != null)
                 {
                     SetCharacterPos(enemyInstance, spawnPoint);
+                    enemyInstance.Init(m_grid, m_playerInstance);
                     m_enemiesInstances.Add(enemyInstance);
                 }
                 else
@@ -124,6 +125,12 @@ public class WorldComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateInputs();
+        UpdateEnemies();
+    }
+
+    void UpdateInputs()
+    {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             MovePlayer(-1, 0);
@@ -142,6 +149,18 @@ public class WorldComponent : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             MovePlayer(0, -1);
+        }
+    }
+
+    void UpdateEnemies()
+    {
+        foreach (EnemyComponent enemy in m_enemiesInstances)
+        {
+            if (enemy.CanMove())
+            {
+                SetCharacterPos(enemy, enemy.TargetCell);
+                enemy.OnMove();
+            }
         }
     }
 
