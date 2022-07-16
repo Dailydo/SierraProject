@@ -21,26 +21,28 @@ public class GridComponent : MonoBehaviour
         {
             m_cells = new Cell[m_width * m_height];
         }
-
-        for (int x = 0; x < m_width; ++x)
-        {
-            for (int y = 0; y < m_height; ++y)
-            {
-                if (y + 1 < m_height)
-                {
-                    Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, 100f);
-                }
-
-                if (x + 1 < m_width)
-                {
-                    Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, 100f);
-                }
-            }
-        }  
     }
 
     void Update()
     {
+        if (m_cells != null)
+        {
+            for (int x = 0; x < m_width; ++x)
+            {
+                for (int y = 0; y < m_height; ++y)
+                {
+                    if (y + 1 < m_height)
+                    {
+                        Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, Time.deltaTime);
+                    }
+
+                    if (x + 1 < m_width)
+                    {
+                        Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, Time.deltaTime);
+                    }
+                }
+            }  
+        }
     }
 
     public Cell GetCell(int x, int y)
