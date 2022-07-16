@@ -2639,18 +2639,6 @@ MonoBehaviour:
     m_effect: 0
   - m_walkable: 0
     m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
   - m_walkable: 0
     m_effect: 0
   - m_walkable: 0
@@ -2661,7 +2649,9 @@ MonoBehaviour:
     m_effect: 0
   - m_walkable: 1
     m_effect: 0
-  - m_walkable: 1
+  - m_walkable: 0
+    m_effect: 0
+  - m_walkable: 0
     m_effect: 0
   - m_walkable: 0
     m_effect: 0
@@ -2673,36 +2663,22 @@ MonoBehaviour:
     m_effect: 0
   - m_walkable: 1
     m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
   - m_walkable: 0
     m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
+  - m_walkable: 0
     m_effect: 0
   - m_walkable: 1
     m_effect: 0
   - m_walkable: 1
     m_effect: 1
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 0
+    m_effect: 0
+  - m_walkable: 0
+    m_effect: 0
   - m_walkable: 0
     m_effect: 0
   - m_walkable: 1
@@ -2717,17 +2693,41 @@ MonoBehaviour:
     m_effect: 0
   - m_walkable: 1
     m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 2
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
   - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
     m_effect: 0
   - m_walkable: 1
     m_effect: 0
