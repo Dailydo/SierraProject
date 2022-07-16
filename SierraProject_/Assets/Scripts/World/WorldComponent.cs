@@ -54,6 +54,9 @@ public class WorldComponent : MonoBehaviour
     {
         int posX = Mathf.Clamp(m_characterInstance.PosX + moveX, 0, m_grid.Width - 1);
         int posY = Mathf.Clamp(m_characterInstance.PosY + moveY, 0, m_grid.Height - 1);
+        if (posX == m_characterInstance.PosX && posY == m_characterInstance.PosY)
+            return;
+
         Cell cell = m_grid.GetCell(posX, posY);
         if (cell == null)
         {
@@ -67,5 +70,15 @@ public class WorldComponent : MonoBehaviour
         m_characterInstance.transform.position = m_grid.GetWorldPosition(posX, posY);
         m_characterInstance.PosX = posX;
         m_characterInstance.PosY = posY;
+
+        OnCharacterEnteredCell(cell);
+    }
+
+    void OnCharacterEnteredCell(Cell _cell)
+    {
+        if (_cell.Effect == ECellEffect.Victory)
+        {
+            Debug.Log("VICTORY");
+        }
     }
 }
