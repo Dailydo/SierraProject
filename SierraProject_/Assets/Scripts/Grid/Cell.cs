@@ -6,7 +6,7 @@ public enum ECellEffect
     None = 0,
     PlayerSpawnPoint,
     Victory,
-    Trap
+    EnemySpawnPoint
 }
 
 [Serializable]

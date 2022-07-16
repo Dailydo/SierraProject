@@ -2434,6 +2434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerPrefab: {fileID: 6586637111690868608, guid: 4c5611a387aeca94baf19883644c6024, type: 3}
+  m_enemyPrefab: {fileID: 6586637111690868608, guid: b9be3c17903b8774283e540bb2011f8a, type: 3}
   m_grid: {fileID: 2091455911}
   m_victoryTextGO: {fileID: 2078564259}
 --- !u!1 &2078564259
@@ -2657,11 +2658,11 @@ MonoBehaviour:
     m_effect: 0
   - m_walkable: 0
     m_effect: 0
-  - m_walkable: 1
+  - m_walkable: 0
     m_effect: 0
-  - m_walkable: 1
+  - m_walkable: 0
     m_effect: 0
-  - m_walkable: 1
+  - m_walkable: 0
     m_effect: 0
   - m_walkable: 0
     m_effect: 0
@@ -2679,25 +2680,25 @@ MonoBehaviour:
     m_effect: 0
   - m_walkable: 0
     m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 0
+    m_effect: 0
   - m_walkable: 0
     m_effect: 0
   - m_walkable: 1
     m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
+  - m_walkable: 0
     m_effect: 0
   - m_walkable: 1
     m_effect: 0
@@ -2733,20 +2734,6 @@ MonoBehaviour:
     m_effect: 0
   - m_walkable: 1
     m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 0
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
-  - m_walkable: 1
-    m_effect: 0
   - m_walkable: 1
     m_effect: 0
   - m_walkable: 1
@@ -2757,16 +2744,30 @@ MonoBehaviour:
     m_effect: 0
   - m_walkable: 0
     m_effect: 0
-  - m_walkable: 0
+  - m_walkable: 1
     m_effect: 0
-  - m_walkable: 0
+  - m_walkable: 1
     m_effect: 0
-  - m_walkable: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
+    m_effect: 0
+  - m_walkable: 1
     m_effect: 0
   - m_walkable: 1
     m_effect: 0
   - m_walkable: 0
     m_effect: 0
+  - m_walkable: 1
+    m_effect: 3
   - m_walkable: 0
     m_effect: 0
   - m_walkable: 0

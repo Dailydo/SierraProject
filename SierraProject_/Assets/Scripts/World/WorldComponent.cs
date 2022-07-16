@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WorldComponent : MonoBehaviour
@@ -6,12 +7,16 @@ public class WorldComponent : MonoBehaviour
     private GameObject m_playerPrefab = null;
 
     [SerializeField]
+    private GameObject m_enemyPrefab = null;
+
+    [SerializeField]
     private GridComponent m_grid = null;
 
     [SerializeField]
     private GameObject m_victoryTextGO = null;
 
     private PlayerComponent m_playerInstance = null;
+    private List<EnemyComponent> m_enemiesInstances = new List<EnemyComponent>();
 
     // Start is called before the first frame update
     void Start()
@@ -19,23 +24,39 @@ public class WorldComponent : MonoBehaviour
         m_grid.InitCells();
         InstantiatePlayer();
         InitVictoryText();
+
+        // TEMP test
+        InstantiateEnemy();
     }
 
     void InstantiatePlayer()
     {
-        GameObject characterGO = Instantiate<GameObject>(m_playerPrefab);
+        GameObject characterGO = Instantiate(m_playerPrefab);
         if (characterGO != null)
         {
             m_playerInstance = characterGO.GetComponent<PlayerComponent>();
-            m_playerInstance.transform.parent = transform;
+            if (m_playerInstance != null)
+            {
+                m_playerInstance.transform.parent = transform;
 
-            Cell cell = m_grid.GetSpecificCell(ECellEffect.PlayerSpawnPoint);
-            if (cell != null)
-                SetCharacterPos(m_playerInstance, cell.PosX, cell.PosY);
+                Cell spawnPoint = m_grid.GetSpecificCell(ECellEffect.PlayerSpawnPoint);
+                if (spawnPoint != null)
+                {
+                    SetCharacterPos(m_playerInstance, spawnPoint);
+                }
+                else
+                {
+                    Debug.LogError("Cannot find player spawn point");
+                }
+            }
+            else
+            {
+                Debug.LogError("No PlayerComponent on player");
+            }
         }
         else
         {
-            Debug.LogError("Cannot instantiate character prefab");
+            Debug.LogError("Cannot instantiate player prefab");
         }
     }
 
@@ -48,6 +69,39 @@ public class WorldComponent : MonoBehaviour
         else
         {
             Debug.LogError("No victory text GO filled");
+        }
+    }
+
+    void InstantiateEnemy()
+    {
+        GameObject enemyGO = Instantiate(m_enemyPrefab);
+        if (enemyGO != null)
+        {
+            EnemyComponent enemyInstance = enemyGO.GetComponent<EnemyComponent>();
+            if (enemyInstance != null)
+            {
+                enemyInstance.transform.parent = transform; // later, will be the proper grid
+
+                Cell spawnPoint = m_grid.GetSpecificCell(ECellEffect.EnemySpawnPoint);
+                if (spawnPoint != null)
+                {
+                    SetCharacterPos(enemyInstance, spawnPoint);
+                    m_enemiesInstances.Add(enemyInstance);
+                }
+                else
+                {
+                    Destroy(enemyGO);
+                    Debug.LogError("Cannot find enemy spawn point");
+                }
+            }
+            else
+            {
+                Debug.LogError("No EnemyComponent on enemy");
+            }
+        }
+        else
+        {
+            Debug.LogError("Cannot instantiate enemy prefab");
         }
     }
 
@@ -92,22 +146,56 @@ public class WorldComponent : MonoBehaviour
         if (!cell.Walkable)
             return;
 
-        SetCharacterPos(m_playerInstance, posX, posY);
-        OnCharacterEnteredCell(cell);
+        SetCharacterPos(m_playerInstance, cell);
     }
 
-    void SetCharacterPos(CharacterComponent character, int posX, int posY)
+    void SetCharacterPos(CharacterComponent character, Cell cell)
     {
-        character.transform.position = m_grid.GetWorldPosition(posX, posY);
-        character.PosX = posX;
-        character.PosY = posY;
+        Cell previousCell = m_grid.GetCell(character.PosX, character.PosY);
+        if (previousCell != null)
+            OnCharacterLeftCell(character, previousCell);
+
+        character.transform.position = m_grid.GetWorldPosition(cell.PosX, cell.PosY);
+        character.PosX = cell.PosX;
+        character.PosY = cell.PosY;
+
+        OnCharacterEnteredCell(character, cell);
     }
 
-    void OnCharacterEnteredCell(Cell cell)
+    void OnCharacterEnteredCell(CharacterComponent character, Cell cell)
     {
-        if (cell.Effect == ECellEffect.Victory)
+        if (character == m_playerInstance)
         {
-            m_victoryTextGO.SetActive(true);
+            // check cell danger
+
+            // check victory condition
+            if (cell.Effect == ECellEffect.Victory)
+            {
+                m_victoryTextGO.SetActive(true);
+            }
         }
+        else
+        {
+            // check defeat condition
+            if (AreOnSameCell(character, m_playerInstance))
+            {
+                Debug.Log("Defeat");
+            }
+
+            // update cell danger
+        }
+    }
+
+    void OnCharacterLeftCell(CharacterComponent character, Cell cell)
+    {
+        if (character is EnemyComponent)
+        {
+            // remove cell danger
+        }
+    }
+
+    bool AreOnSameCell(CharacterComponent character, CharacterComponent other)
+    {
+        return character.PosX == other.PosX && character.PosY == other.PosY;
     }
 }
