@@ -8,6 +8,9 @@ public class WorldComponent : MonoBehaviour
     [SerializeField]
     private GridComponent m_grid = null;
 
+    [SerializeField]
+    private GameObject m_victoryTextGO = null;
+
     private CharacterComponent m_characterInstance = null;
 
     // Start is called before the first frame update
@@ -23,6 +26,15 @@ public class WorldComponent : MonoBehaviour
         else
         {
             Debug.LogError("Cannot instantiate character prefab");
+        }
+
+        if (m_victoryTextGO != null)
+        {
+            m_victoryTextGO.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("No victory text GO filled");
         }
     }
 
@@ -78,7 +90,7 @@ public class WorldComponent : MonoBehaviour
     {
         if (_cell.Effect == ECellEffect.Victory)
         {
-            Debug.Log("VICTORY");
+            m_victoryTextGO.SetActive(true);
         }
     }
 }
