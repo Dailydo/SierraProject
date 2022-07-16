@@ -1,6 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EPlane
+{
+    Base = 0,
+    Flesh,
+    Electric,
+    Ether
+}
+
 public class WorldComponent : MonoBehaviour
 {
     [SerializeField]
