@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class IngredientComponent : MonoBehaviour
 {
+    // Array of IngredientInstanceComponent -> EPlane m_plane
+
     private Cell m_cell = null;
 
     public void Init(GridComponent grid)
@@ -15,5 +17,10 @@ public class IngredientComponent : MonoBehaviour
         {
             Debug.LogWarning(name + " cannot find its cell");
         }
+    }
+
+    public virtual ECellEffect GetCellEffect()
+    {
+        return ECellEffect.None;
     }
 }

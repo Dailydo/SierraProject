@@ -24,12 +24,18 @@ public class Cell
 
     public bool Walkable
     {
-        get { return m_effect != ECellEffect.Obstacle; }
+        get { return Effect != ECellEffect.Obstacle; }
     }
 
     public ECellEffect Effect
     {
-        get { return m_effect; }
+        get
+        {
+            if (m_innerIngredient != null && m_innerIngredient.GetCellEffect() != ECellEffect.None)
+                return m_innerIngredient.GetCellEffect();
+
+            return m_effect;
+        }
         set { m_effect = value; }
     }
 
@@ -60,5 +66,4 @@ public class Cell
         m_posX = posX;
         m_posY = posY;
     }
-
 }
