@@ -56,8 +56,8 @@ public class GridComponent : MonoBehaviour
                         Cell cell = GetCell(x, y);
                         if (cell != null && !cell.IsWalkable())
                         {
-                            Debug.DrawLine(GetWorldPosition(x, y + 1), GetWorldPosition(x + 1, y), Color.red, Time.deltaTime);
-                            Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y + 1), Color.red, Time.deltaTime);
+                            Debug.DrawLine(GetCellPosition(x, y + 1), GetCellPosition(x + 1, y), Color.red, Time.deltaTime);
+                            Debug.DrawLine(GetCellPosition(x, y), GetCellPosition(x + 1, y + 1), Color.red, Time.deltaTime);
                         }
                     }
                 }
