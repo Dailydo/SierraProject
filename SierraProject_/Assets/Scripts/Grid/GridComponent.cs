@@ -63,14 +63,6 @@ public class GridComponent : MonoBehaviour
         return m_cells[x + y * m_height];
     }
 
-    public Vector3 GetCellPosition(int x, int y)
-    {
-        if (!IsValidPosition(x, y))
-            return Vector3.zero;
-
-        return new Vector3(x, y) * m_cellSize + transform.position;
-    }
-
     public Vector3 GetWorldPosition(int x, int y)
     {
         if (!IsValidPosition(x, y))
@@ -82,5 +74,10 @@ public class GridComponent : MonoBehaviour
     public bool IsValidPosition(int x, int y)
     {
         return x >= 0 && x < m_width && y >= 0 && y < m_height;
+    }
+
+    private Vector3 GetCellPosition(int x, int y)
+    {
+        return new Vector3(x, y) * m_cellSize + transform.position;
     }
 }
