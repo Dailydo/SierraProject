@@ -43,12 +43,12 @@ public class GridComponent : MonoBehaviour
                 {
                     if (y + 1 < m_height)
                     {
-                        Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, Time.deltaTime);
+                        Debug.DrawLine(GetCellPosition(x, y), GetCellPosition(x, y + 1), Color.white, Time.deltaTime);
                     }
 
                     if (x + 1 < m_width)
                     {
-                        Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, Time.deltaTime);
+                        Debug.DrawLine(GetCellPosition(x, y), GetCellPosition(x + 1, y), Color.white, Time.deltaTime);
                     }
                 }
             }  
@@ -57,17 +57,30 @@ public class GridComponent : MonoBehaviour
 
     public Cell GetCell(int x, int y)
     {
-        if (x >= m_width || y >= m_height)
+        if (!IsValidPosition(x, y))
             return null;
 
         return m_cells[x + y * m_height];
     }
 
-    public Vector3 GetWorldPosition(int x, int y)
+    public Vector3 GetCellPosition(int x, int y)
     {
-        if (x >= m_width || y >= m_height)
+        if (!IsValidPosition(x, y))
             return Vector3.zero;
 
         return new Vector3(x, y) * m_cellSize + transform.position;
+    }
+
+    public Vector3 GetWorldPosition(int x, int y)
+    {
+        if (!IsValidPosition(x, y))
+            return Vector3.zero;
+
+        return new Vector3(x, y) * m_cellSize + new Vector3(m_cellSize * 0.5f, m_cellSize * 0.5f) + transform.position;
+    }
+
+    public bool IsValidPosition(int x, int y)
+    {
+        return x >= 0 && x < m_width && y >= 0 && y < m_height;
     }
 }
