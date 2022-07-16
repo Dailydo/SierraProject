@@ -6,7 +6,9 @@ public enum EPlane
     Base = 0,
     Flesh,
     Electric,
-    Ether
+    Ether,
+    
+    Count
 }
 
 public class WorldComponent : MonoBehaviour
@@ -29,8 +31,15 @@ public class WorldComponent : MonoBehaviour
     [SerializeField]
     private GameObject m_defeatTextGO = null;
 
+    [SerializeField]
+    private float m_swapPlaneDelay = 5.0f;
+
     private PlayerComponent m_playerInstance = null;
     private List<EnemyComponent> m_enemiesInstances = new List<EnemyComponent>();
+    private IngredientComponent[] m_ingredients;
+
+    private EPlane m_currentPlane = EPlane.Base;
+    private float m_swapPlaneCooldown;
 
     private bool m_victory = false;
 
@@ -43,6 +52,7 @@ public class WorldComponent : MonoBehaviour
         InitVictoryText();
         InitDefeatText();
 
+        m_swapPlaneCooldown = m_swapPlaneDelay;
         m_victory = false;
 
         // TEMP test
@@ -51,10 +61,10 @@ public class WorldComponent : MonoBehaviour
 
     void InitIngredients()
     {
-        IngredientComponent[] ingredients = transform.GetComponentsInChildren<IngredientComponent>();
-        for (int i = 0; i < ingredients.Length; ++i)
+        m_ingredients = transform.GetComponentsInChildren<IngredientComponent>();
+        for (int i = 0; i < m_ingredients.Length; ++i)
         {
-            ingredients[i].Init(m_grid);
+            m_ingredients[i].Init(m_grid);
         }
     }
 
@@ -154,6 +164,7 @@ public class WorldComponent : MonoBehaviour
 
         UpdateInputs();
         UpdateEnemies();
+        UpdateCurrentPlane();
     }
 
     void UpdateInputs()
@@ -186,6 +197,21 @@ public class WorldComponent : MonoBehaviour
             if (enemy.CanMove())
             {
                 SetCharacterPos(enemy, enemy.TargetCell, false);
+            }
+        }
+    }
+
+    void UpdateCurrentPlane()
+    {
+        if (m_swapPlaneCooldown > 0.0f)
+        {
+            m_swapPlaneCooldown -= Time.deltaTime;
+            if (m_swapPlaneCooldown <= 0.0f)
+            {
+                int newPlaneIdx = Random.Range(0, (int)EPlane.Count);
+                SetCurrentPlane((EPlane)newPlaneIdx);
+
+                m_swapPlaneCooldown = m_swapPlaneDelay;
             }
         }
     }
@@ -274,6 +300,18 @@ public class WorldComponent : MonoBehaviour
             // remove cell danger
             cell.IsLetal = false;
         }
+    }
+
+    private void SetCurrentPlane(EPlane newPlane)
+    {
+        m_currentPlane = newPlane;
+
+        foreach (IngredientComponent ingredient in m_ingredients)
+        {
+            ingredient.SetCurrentPlane(newPlane);
+        }
+
+        // TODO update tilemap
     }
 
     private void LateUpdate()
