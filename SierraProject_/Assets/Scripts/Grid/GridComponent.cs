@@ -99,12 +99,33 @@ public class GridComponent : MonoBehaviour
         if (!IsValidPosition(x, y))
             return null;
 
-        return m_cells[GetCellIdx(x, y)];
+        return m_cells[GetCellGlobalIndexFromXYIndex(x, y)];
     }
 
-    private int GetCellIdx(int x, int y)
+    public Cell GetCell(int globalIndex)
     {
+        if (!IsValidPositionForGlobalIndex(globalIndex))
+            return null;
+
+        return m_cells[globalIndex];
+    }
+
+    public int GetCellGlobalIndexFromXYIndex(int x, int y)
+    {
+        if (!IsValidPosition(x, y))
+            return -1;
         return x + y * m_width;
+    }
+
+    public bool GetCellXYIndexFromGlobalIndex(int globalIndex, out int xIndex, out int yIndex)
+    {
+        xIndex = -1;
+        yIndex = -1;
+        if (globalIndex < 0 || globalIndex >= m_width * m_height)
+            return false;
+        xIndex = globalIndex % m_width;
+        yIndex = globalIndex / m_width;
+        return true;
     }
 
     public List<Cell> GetWalkableNeighbours(int x, int y)
@@ -142,6 +163,11 @@ public class GridComponent : MonoBehaviour
         return x >= 0 && x < m_width && y >= 0 && y < m_height;
     }
 
+    public bool IsValidPositionForGlobalIndex(int globalIndex)
+    {
+        return globalIndex >= 0 && globalIndex < m_width * m_height;
+    }
+
     public Cell GetSpecificCell(ECellEffect effect)
     {
         for (int i = 0; i < m_cells.Length; ++i)
@@ -162,7 +188,7 @@ public class GridComponent : MonoBehaviour
         GameObject textGO = Instantiate(m_cellDebugTextPrefab, GetWorldPosition(x, y), Quaternion.identity, m_canvasGO.transform);
         if (textGO != null)
         {
-            int idx = GetCellIdx(x, y);
+            int idx = GetCellGlobalIndexFromXYIndex(x, y);
 
             textGO.name = "CellDebugText -> " + idx.ToString();
 

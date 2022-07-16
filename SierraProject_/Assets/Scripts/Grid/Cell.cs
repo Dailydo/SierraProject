@@ -6,15 +6,13 @@ public enum ECellEffect
     None = 0,
     PlayerSpawnPoint,
     Victory,
-    EnemySpawnPoint
+    EnemySpawnPoint,
+    Obstacle,
 }
 
 [Serializable]
 public class Cell
 {
-    [SerializeField]
-    private bool m_walkable = true;
-
     [SerializeField]
     private ECellEffect m_effect = ECellEffect.None;
 
@@ -24,13 +22,13 @@ public class Cell
 
     public bool Walkable
     {
-        get { return m_walkable; }
-        set { m_walkable = value; }
+        get { return m_effect != ECellEffect.Obstacle; }
     }
 
     public ECellEffect Effect
     {
         get { return m_effect; }
+        set { m_effect = value; }
     }
 
     public int PosX
