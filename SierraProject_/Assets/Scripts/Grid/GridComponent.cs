@@ -1,7 +1,5 @@
-using UnityEditor;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class GridComponent : MonoBehaviour
 {
     [SerializeField]
@@ -18,8 +16,6 @@ public class GridComponent : MonoBehaviour
 
     void Awake()
     {
-        if (m_cells == null)
-            m_cells = new Cell[m_width * m_height];
     }
 
     void Update()
