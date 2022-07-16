@@ -102,6 +102,12 @@ public class GridComponent : MonoBehaviour
         return m_cells[GetCellIdx(x, y)];
     }
 
+    public Cell FindCellFromWorldPosition(Vector3 worldPosition)
+    {
+        Vector3 localPosition = transform.InverseTransformPoint(worldPosition);
+        return GetCell(Mathf.FloorToInt(localPosition.x * m_cellSize), Mathf.FloorToInt(localPosition.y * m_cellSize));
+    }
+
     private int GetCellIdx(int x, int y)
     {
         return x + y * m_width;

@@ -30,6 +30,7 @@ public class WorldComponent : MonoBehaviour
     void Start()
     {
         m_grid.InitCells();
+        InitIngredients();
         InstantiatePlayer();
         InitVictoryText();
         InitDefeatText();
@@ -38,6 +39,15 @@ public class WorldComponent : MonoBehaviour
 
         // TEMP test
         InstantiateEnemy();
+    }
+
+    void InitIngredients()
+    {
+        IngredientComponent[] ingredients = transform.GetComponentsInChildren<IngredientComponent>();
+        for (int i = 0; i < ingredients.Length; ++i)
+        {
+            ingredients[i].Init(m_grid);
+        }
     }
 
     void InstantiatePlayer()

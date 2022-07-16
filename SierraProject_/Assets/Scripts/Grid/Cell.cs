@@ -18,6 +18,8 @@ public class Cell
     [SerializeField]
     private ECellEffect m_effect = ECellEffect.None;
 
+    private IngredientComponent m_innerIngredient = null;
+
     private int m_posX = 0;
     private int m_posY = 0;
     private bool m_isLetal = false;
@@ -47,6 +49,12 @@ public class Cell
     {
         get { return m_isLetal; }
         set { m_isLetal = value; }
+    }
+
+    public IngredientComponent InnerIngredient
+    {
+        get { return m_innerIngredient; }
+        set { m_innerIngredient = value; }
     }
 
     public void Init(int posX, int posY)
