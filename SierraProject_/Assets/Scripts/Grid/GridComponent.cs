@@ -78,7 +78,7 @@ public class GridComponent : MonoBehaviour
         if (!IsValidPosition(x, y))
             return Vector3.zero;
 
-        return new Vector3(x, y) * m_cellSize + new Vector3(m_cellSize * 0.5f, m_cellSize * 0.5f) + transform.position;
+        return GetCellPosition(x, y) + new Vector3(m_cellSize * 0.5f, m_cellSize * 0.5f);
     }
 
     public bool IsValidPosition(int x, int y)
