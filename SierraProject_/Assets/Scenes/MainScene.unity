@@ -2006,6 +2006,36 @@ MonoBehaviour:
   - m_walkable: 0
   - m_walkable: 0
   - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
+  - m_walkable: 0
   m_cellSize: 1
-  m_width: 10
+  m_width: 13
   m_height: 10
