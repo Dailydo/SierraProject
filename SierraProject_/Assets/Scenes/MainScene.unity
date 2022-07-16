@@ -13063,6 +13063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerPrefab: {fileID: 6586637111690868608, guid: 4c5611a387aeca94baf19883644c6024, type: 3}
   m_enemyPrefab: {fileID: 6586637111690868608, guid: b9be3c17903b8774283e540bb2011f8a, type: 3}
+  m_cameraTransform: {fileID: 330333236}
   m_grid: {fileID: 2091455911}
   m_victoryTextGO: {fileID: 2078564259}
   m_defeatTextGO: {fileID: 2036092802}

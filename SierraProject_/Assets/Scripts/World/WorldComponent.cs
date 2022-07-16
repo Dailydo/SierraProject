@@ -10,6 +10,9 @@ public class WorldComponent : MonoBehaviour
     private GameObject m_enemyPrefab = null;
 
     [SerializeField]
+    private Transform m_cameraTransform = null;
+
+    [SerializeField]
     private GridComponent m_grid = null;
 
     [SerializeField]
