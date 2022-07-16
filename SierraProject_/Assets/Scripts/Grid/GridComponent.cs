@@ -51,7 +51,7 @@ public class GridComponent : MonoBehaviour
                         Debug.DrawLine(GetCellPosition(x, y), GetCellPosition(x + 1, y), Color.white, Time.deltaTime);
                     }
 
-                    if (x + 1 < m_width && y + 1 < m_height)
+                    if (x + 1 <= m_width && y + 1 <= m_height)
                     {
                         Cell cell = GetCell(x, y);
                         if (cell != null && !cell.IsWalkable())
