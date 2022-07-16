@@ -17,7 +17,7 @@ public class WorldComponent : MonoBehaviour
         if (characterGO != null)
         {
             m_characterInstance = characterGO.GetComponent<CharacterComponent>();
-            m_characterInstance.transform.position = m_grid.GetWorldPosition(2, 4);
+            m_characterInstance.transform.position = m_grid.GetWorldPosition(0, 0);
             m_characterInstance.transform.parent = transform;
         }
         else
@@ -29,6 +29,37 @@ public class WorldComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            MoveCharacter(-1, 0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            MoveCharacter(1, 0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            MoveCharacter(0, 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            MoveCharacter(0, -1);
+        }
+    }
+
+    void MoveCharacter(int moveX, int moveY)
+    {
+        int posX = Mathf.Clamp(m_characterInstance.PosX + moveX, 0, m_grid.Width - 1);
+        int posY = Mathf.Clamp(m_characterInstance.PosY + moveY, 0, m_grid.Height - 1);
+        Cell cell = m_grid.GetCell(posX, posY);
+        if (cell == null || !cell.Walkable)
+            return;
+
+        m_characterInstance.transform.position = m_grid.GetWorldPosition(posX, posY);
+        m_characterInstance.PosX = posX;
+        m_characterInstance.PosY = posY;
     }
 }

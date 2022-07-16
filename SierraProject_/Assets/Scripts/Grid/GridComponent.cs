@@ -14,6 +14,16 @@ public class GridComponent : MonoBehaviour
     [SerializeField]
     private int m_height = 5;
 
+    public int Width
+    {
+        get { return m_width; }
+    }
+
+    public int Height
+    {
+        get { return m_height; }
+    }
+
     void Awake()
     {
     }
