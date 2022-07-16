@@ -3,13 +3,9 @@ using UnityEngine;
 
 public class EnemyComponent : CharacterComponent
 {
-    [SerializeField]
-    private float m_moveDelayInSeconds = 1.0f;
-
     private GridComponent m_grid = null;
     private PlayerComponent m_target = null;
     private Cell m_targetCell = null;
-    private float m_timeBeforeNextMove = 0.0f;
 
     private int m_lastTargetPosX = 0;
     private int m_lastTargetPosY = 0;
@@ -24,28 +20,25 @@ public class EnemyComponent : CharacterComponent
         m_grid = grid;
         m_target = target;
 
-        m_timeBeforeNextMove = m_moveDelayInSeconds;
         ComputeTargetCell();
     }
 
-    public bool CanMove()
+    public override bool CanMoveInternal()
     {
-        return m_timeBeforeNextMove <= 0.0f && m_targetCell != null;
+        return m_targetCell != null;
     }
 
-    public void OnMove()
+    protected override void OnMoveInternal()
     {
-        m_timeBeforeNextMove = m_moveDelayInSeconds;
+        base.OnMoveInternal();
+
         // remove target cell from pathfinding
         m_targetCell = null;
     }
 
-    private void Update()
+    protected override void UpdateInternal()
     {
-        if (m_timeBeforeNextMove > 0.0f)
-        {
-            m_timeBeforeNextMove -= Time.deltaTime;
-        }
+        base.UpdateInternal();
 
         if (m_targetCell == null)
             ComputeTargetCell();

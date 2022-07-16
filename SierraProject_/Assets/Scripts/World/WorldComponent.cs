@@ -166,6 +166,9 @@ public class WorldComponent : MonoBehaviour
 
     void MovePlayer(int moveX, int moveY)
     {
+        if (!m_playerInstance.CanMove())
+            return;
+
         int posX = Mathf.Clamp(m_playerInstance.PosX + moveX, 0, m_grid.Width - 1);
         int posY = Mathf.Clamp(m_playerInstance.PosY + moveY, 0, m_grid.Height - 1);
         if (posX == m_playerInstance.PosX && posY == m_playerInstance.PosY)
@@ -182,6 +185,7 @@ public class WorldComponent : MonoBehaviour
             return;
 
         SetCharacterPos(m_playerInstance, cell);
+        m_playerInstance.OnMove();
     }
 
     void SetCharacterPos(CharacterComponent character, Cell cell)
