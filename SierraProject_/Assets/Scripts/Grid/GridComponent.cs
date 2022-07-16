@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [ExecuteInEditMode]
@@ -15,6 +16,15 @@ public class GridComponent : MonoBehaviour
 
     [SerializeField]
     private int m_height = 5;
+
+    [SerializeField]
+    private GameObject m_cellDebugTextPrefab = null;
+
+    [SerializeField]
+    private GameObject m_canvasGO = null;
+
+    [SerializeField]
+    private bool m_instantiateDebugText = false;
 
     public int Width
     {
@@ -74,8 +84,13 @@ public class GridComponent : MonoBehaviour
                             Debug.DrawLine(GetCellPosition(x, y), GetCellPosition(x + 1, y + 1), Color.red, Time.deltaTime);
                         }
                     }
+
+                    if (m_instantiateDebugText)
+                        InstantiateCellDebugText(x, y);
                 }
-            }  
+            }
+
+            m_instantiateDebugText = false;
         }
     }
 
@@ -84,7 +99,12 @@ public class GridComponent : MonoBehaviour
         if (!IsValidPosition(x, y))
             return null;
 
-        return m_cells[x + y * m_width];
+        return m_cells[GetCellIdx(x, y)];
+    }
+
+    private int GetCellIdx(int x, int y)
+    {
+        return x + y * m_width;
     }
 
     public List<Cell> GetWalkableNeighbours(int x, int y)
@@ -114,7 +134,7 @@ public class GridComponent : MonoBehaviour
         if (!IsValidPosition(x, y))
             return Vector3.zero;
 
-        return GetCellPosition(x, y) + new Vector3(m_cellSize * 0.5f, m_cellSize * 0.5f);
+        return GetCellPosition(x, y) + new Vector3(m_cellSize * 0.5f, m_cellSize * 0.5f, 0.0f);
     }
 
     public bool IsValidPosition(int x, int y)
@@ -134,6 +154,21 @@ public class GridComponent : MonoBehaviour
 
     private Vector3 GetCellPosition(int x, int y)
     {
-        return new Vector3(x, y) * m_cellSize + transform.position;
+        return new Vector3(x, y, 0.0f) * m_cellSize + transform.position;
+    }
+
+    private void InstantiateCellDebugText(int x, int y)
+    {
+        GameObject textGO = Instantiate(m_cellDebugTextPrefab, GetWorldPosition(x, y), Quaternion.identity, m_canvasGO.transform);
+        if (textGO != null)
+        {
+            int idx = GetCellIdx(x, y);
+
+            textGO.name = "CellDebugText -> " + idx.ToString();
+
+            TextMeshProUGUI txtMesh = textGO.GetComponent<TextMeshProUGUI>();
+            if (txtMesh != null)
+                txtMesh.text = idx.ToString();
+        }
     }
 }
