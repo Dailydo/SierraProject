@@ -169,22 +169,22 @@ public class WorldComponent : MonoBehaviour
 
     void UpdateInputs()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q))
         {
             MovePlayer(-1, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
             MovePlayer(1, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKey(KeyCode.Z))
         {
             MovePlayer(0, 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             MovePlayer(0, -1);
         }
