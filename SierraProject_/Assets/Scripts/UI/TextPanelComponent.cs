@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
+
+[Serializable]
+public class TextPanelDisplayData
+{
+    public string m_text;
+    public Color m_textColor;
+}
 
 public class TextPanelComponent : MonoBehaviour
 {
@@ -23,12 +31,13 @@ public class TextPanelComponent : MonoBehaviour
     { 
     }
 
-    public void RequestText(string text)
+    public void RequestText(TextPanelDisplayData text)
     {
         if (m_textMeshComponent != null && gameObject != null)
         {
             gameObject.SetActive(true);
-            m_textMeshComponent.text = text;
+            m_textMeshComponent.text = text.m_text;
+            m_textMeshComponent.color = text.m_textColor;
         }
     }
 
@@ -44,7 +53,7 @@ public class TextPanelComponent : MonoBehaviour
     public void ResetText()
     {
         if (m_textMeshComponent != null && gameObject != null && gameObject.activeSelf == true)
-        {
+        {           
             m_textMeshComponent.text = new string("");
             gameObject.SetActive(true);
         }

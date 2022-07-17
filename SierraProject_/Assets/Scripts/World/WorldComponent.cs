@@ -32,10 +32,10 @@ public class WorldComponent : MonoBehaviour
     private float m_swapPlaneDelay = 5.0f;
 
     [SerializeField]
-    private string m_victoryText;
+    private TextPanelDisplayData m_victoryText;
 
     [SerializeField]
-    private string m_defeatText;  
+    private TextPanelDisplayData m_defeatText;  
 
     [SerializeField]
     private EPlane m_overridenPlane = EPlane.Count;

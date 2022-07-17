@@ -39,7 +39,7 @@ public class HUDComponent : MonoBehaviour
         }
     }
 
-    public void RequestDisplayText(string text)
+    public void RequestDisplayText(TextPanelDisplayData text)
     {
         if (m_textPanel != null)
         {
