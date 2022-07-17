@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5869940416534640946}
   - component: {fileID: 5472220220920989055}
   m_Layer: 0
-  m_Name: RedEgg
+  m_Name: CrawlerEgg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
