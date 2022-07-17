@@ -192,7 +192,7 @@ public class WorldComponent : MonoBehaviour
             MovePlayer(0, -1);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             TryInteract();
         }
