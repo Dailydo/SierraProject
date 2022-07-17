@@ -55,7 +55,7 @@ public class CharacterComponent : MonoBehaviour
 
         if (m_isMoving)
         {
-            float lerpVal = 1.0f - Mathf.Max(0.0f, m_timeBeforeNextMove / m_moveDelayInSeconds);
+            float lerpVal = 1.0f - Mathf.Max(0.0f, m_timeBeforeNextMove / GetMoveDelayInSeconds());
             Vector3 pos = Vector3.Lerp(m_currentWorldPos, m_targetWorldPos, lerpVal);
             transform.position = pos;
 
@@ -84,7 +84,7 @@ public class CharacterComponent : MonoBehaviour
 
     public void MoveTo(Vector3 targetWorldPos)
     {
-        m_timeBeforeNextMove = m_moveDelayInSeconds;
+        m_timeBeforeNextMove = GetMoveDelayInSeconds();
         m_targetWorldPos = targetWorldPos;
         m_isMoving = true;
 
@@ -98,5 +98,10 @@ public class CharacterComponent : MonoBehaviour
 
     protected virtual void OnMoveInternal()
     {
+    }
+
+    protected virtual float GetMoveDelayInSeconds()
+    {
+        return m_moveDelayInSeconds;
     }
 }

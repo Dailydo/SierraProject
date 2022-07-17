@@ -9,6 +9,9 @@ public class PlayerComponent : CharacterComponent
         public int m_y = 0;
     }
 
+    [SerializeField]
+    private float m_woundedTimeToMoveFactor = 2.0f;
+
     private const int HP_MAX = 2;
     private int m_hp = HP_MAX;
 
@@ -16,9 +19,9 @@ public class PlayerComponent : CharacterComponent
     private int m_yAggroRadius = 8;
     private int m_inondationMapXSize = -1;
     private int m_inondationMapYSize = -1;
-    private float m_inondationMapComputeCooldown = 2f;
-    private float m_inondationMapTimer = -1f;
     private int[,] m_inondationMap = null;
+    int m_playerPosXWhenInondationComputed = -1;
+    int m_playerPosYWhenInondationComputed = -1;
 
     private GridComponent m_grid = null;
 
@@ -48,7 +51,7 @@ public class PlayerComponent : CharacterComponent
         if (m_hp < 0)
             m_hp = 0;
 
-        UpdateSpriteAlpha();
+        UpdateSpriteColor();
     }
 
     public void Heal()
@@ -57,32 +60,38 @@ public class PlayerComponent : CharacterComponent
         if (m_hp > HP_MAX)
             m_hp = HP_MAX;
 
-        UpdateSpriteAlpha();
+        UpdateSpriteColor();
     }
 
-    private void UpdateSpriteAlpha()
+    protected override float GetMoveDelayInSeconds()
+    {
+        return base.GetMoveDelayInSeconds() * (m_hp > 0 && m_hp < HP_MAX ? m_woundedTimeToMoveFactor : 1.0f);
+    }
+
+    private void UpdateSpriteColor()
     {
         Color col = CharacterSprite.color;
-        col.a = m_hp == HP_MAX ? 1.0f : 0.5f;
+        col.g = m_hp == HP_MAX ? 1.0f : 0.5f;
+        col.b = m_hp == HP_MAX ? 1.0f : 0.5f;
         CharacterSprite.color = col;
     }
 
     protected override void UpdateInternal()
     {
         base.UpdateInternal();
+    }
+
+    protected override void OnMoveInternal()
+    {
+        base.OnMoveInternal();
         UpdateInondationMap();
     }
  
     public void UpdateInondationMap()
     {
-        m_inondationMapTimer -= Time.deltaTime;
-        if (m_inondationMapTimer < 0f)
-        {
-            m_inondationMapTimer = m_inondationMapComputeCooldown;
-            ResetInondationMap();
-            ComputeInondationMap();
-            DisplayDebugInondationMap();
-        }
+        ResetInondationMap();
+        ComputeInondationMap();
+        //DisplayDebugInondationMap();
     }
 
     public void InitInondationMap()
@@ -91,7 +100,6 @@ public class PlayerComponent : CharacterComponent
         {
             m_inondationMapXSize = m_xAggroRadius * 2 + 1;
             m_inondationMapYSize = m_yAggroRadius * 2 + 1;
-            m_inondationMapTimer = m_inondationMapComputeCooldown;
             m_inondationMap = new int[m_inondationMapXSize, m_inondationMapYSize];
         }
     }
@@ -114,6 +122,9 @@ public class PlayerComponent : CharacterComponent
     {
         if (m_inondationMap != null && m_grid != null)
         {
+            m_playerPosXWhenInondationComputed = PosX;
+            m_playerPosYWhenInondationComputed = PosY;
+            
             InondationMapCell playerCentricCell = new InondationMapCell();
             playerCentricCell.m_x = m_xAggroRadius;
             playerCentricCell.m_y = m_yAggroRadius;
@@ -176,7 +187,6 @@ public class PlayerComponent : CharacterComponent
 
     private void DisplayDebugInondationMap()
     {
-        Debug.Log("Inondation Map DEBUG Size " + m_inondationMapXSize + " " + m_inondationMapYSize);
         if (m_inondationMap != null)
         {
             string debugString = new string("");
@@ -200,10 +210,10 @@ public class PlayerComponent : CharacterComponent
     {
         path.Clear();
 
-        if (path != null && maxWeight > 0 && m_grid != null)
+        if (path != null && maxWeight > 0 && m_grid != null && m_playerPosXWhenInondationComputed >= 0 && m_playerPosYWhenInondationComputed >= 0)
         {
-            int xOffset = xPos - PosX;
-            int yOffset = yPos - PosY;
+            int xOffset = xPos - m_playerPosXWhenInondationComputed;
+            int yOffset = yPos - m_playerPosYWhenInondationComputed;
 
             int xPlayerPosInInondation = m_xAggroRadius;
             int yPlayerPosInInondation = m_yAggroRadius;
@@ -214,6 +224,9 @@ public class PlayerComponent : CharacterComponent
                 int currentXPosInInondation = xPlayerPosInInondation + xOffset;
                 int currentYPosInInondation = yPlayerPosInInondation + yOffset;
                 int currentInondationWeight = m_inondationMap[currentXPosInInondation, currentYPosInInondation];
+
+                //Debug.Log("Get path to player from enemy Pos X " + xPos + " Pos Y " + yPos + " Global Index " + m_grid.GetCellGlobalIndexFromXYIndex(xPos, yPos) + " Inondation X " + currentXPosInInondation + " Inondation Y " + currentYPosInInondation + " Inondation Weight " + currentInondationWeight + " Player Pos X " + m_playerPosXWhenInondationComputed + " Player Pos Y " + m_playerPosYWhenInondationComputed + " Player Global Index " + m_grid.GetCellGlobalIndexFromXYIndex(m_playerPosXWhenInondationComputed, m_playerPosYWhenInondationComputed));
+
                 if (currentInondationWeight > 0 && currentInondationWeight <= maxWeight)
                 {
                     // A path is existing
@@ -223,40 +236,73 @@ public class PlayerComponent : CharacterComponent
                         int yPosWithSmallerWeight = currentYPosInInondation;
                         int smallerWeight = currentInondationWeight;
 
-                        if (m_inondationMap[currentXPosInInondation - 1, currentYPosInInondation] < smallerWeight)
+                        int neighbourX = currentXPosInInondation - 1;
+                        int neighbourY = currentYPosInInondation;
+                        if (neighbourX >= 0)
                         {
-                            xPosWithSmallerWeight = currentXPosInInondation - 1;
-                            yPosWithSmallerWeight = currentYPosInInondation;  
-                            smallerWeight =  m_inondationMap[xPosWithSmallerWeight, yPosWithSmallerWeight];      
+                            int neighbourWeight = m_inondationMap[neighbourX, neighbourY];
+                            //Debug.Log("Testing Neighbour : Pos X " + neighbourX + " Pos Y " + neighbourY + " Weight " + neighbourWeight);
+                            if ( neighbourWeight >= 0 && neighbourWeight < smallerWeight)
+                            {
+                                //Debug.Log("Neighbour Selected : Pos X " + neighbourX + " Pos Y " + neighbourY);
+                                xPosWithSmallerWeight = neighbourX;
+                                yPosWithSmallerWeight = neighbourY;  
+                                smallerWeight =  neighbourWeight;      
+                            }
                         }
 
-                        if (m_inondationMap[currentXPosInInondation + 1, currentYPosInInondation] < smallerWeight)
+                        neighbourX = currentXPosInInondation + 1;
+                        neighbourY = currentYPosInInondation;
+                        if (neighbourX < m_inondationMapXSize)
                         {
-                            xPosWithSmallerWeight = currentXPosInInondation + 1;
-                            yPosWithSmallerWeight = currentYPosInInondation;  
-                            smallerWeight =  m_inondationMap[xPosWithSmallerWeight, yPosWithSmallerWeight];     
+                            int neighbourWeight = m_inondationMap[neighbourX, neighbourY];
+                            //Debug.Log("Testing Neighbour : Pos X " + neighbourX + " Pos Y " + neighbourY + " Weight " + neighbourWeight);
+                            if ( neighbourWeight >= 0 && neighbourWeight < smallerWeight)
+                            {
+                                //Debug.Log("Neighbour Selected : Pos X " + neighbourX + " Pos Y " + neighbourY);
+                                xPosWithSmallerWeight = neighbourX;
+                                yPosWithSmallerWeight = neighbourY;  
+                                smallerWeight =  neighbourWeight;      
+                            }
                         }
 
-                        if (m_inondationMap[currentXPosInInondation, currentYPosInInondation - 1] < smallerWeight)
+                        neighbourX = currentXPosInInondation;
+                        neighbourY = currentYPosInInondation - 1;
+                        if (neighbourY >= 0)
                         {
-                            xPosWithSmallerWeight = currentXPosInInondation;
-                            yPosWithSmallerWeight = currentYPosInInondation - 1;  
-                            smallerWeight =  m_inondationMap[xPosWithSmallerWeight, yPosWithSmallerWeight];        
+                            int neighbourWeight = m_inondationMap[neighbourX, neighbourY];
+                            //Debug.Log("Testing Neighbour : Pos X " + neighbourX + " Pos Y " + neighbourY + " Weight " + neighbourWeight);
+                            if ( neighbourWeight >= 0 && neighbourWeight < smallerWeight)
+                            {
+                                //Debug.Log("Neighbour Selected : Pos X " + neighbourX + " Pos Y " + neighbourY);
+                                xPosWithSmallerWeight = neighbourX;
+                                yPosWithSmallerWeight = neighbourY;  
+                                smallerWeight =  neighbourWeight;      
+                            }
                         }
 
-                        if (m_inondationMap[currentXPosInInondation, currentYPosInInondation + 1] < smallerWeight)
+                        neighbourX = currentXPosInInondation;
+                        neighbourY = currentYPosInInondation + 1;
+                        if (neighbourY < m_inondationMapYSize)
                         {
-                            xPosWithSmallerWeight = currentXPosInInondation;
-                            yPosWithSmallerWeight = currentYPosInInondation + 1;  
-                            smallerWeight =  m_inondationMap[xPosWithSmallerWeight, yPosWithSmallerWeight];       
+                            int neighbourWeight = m_inondationMap[neighbourX, neighbourY];
+                            //Debug.Log("Testing Neighbour : Pos X " + neighbourX + " Pos Y " + neighbourY + " Weight " + neighbourWeight);
+                            if (neighbourWeight >= 0 && neighbourWeight < smallerWeight)
+                            {
+                                //Debug.Log("Neighbour Selected : Pos X " + neighbourX + " Pos Y " + neighbourY);
+                                xPosWithSmallerWeight = neighbourX;
+                                yPosWithSmallerWeight = neighbourY;  
+                                smallerWeight =  neighbourWeight;      
+                            }
                         }
 
                         currentXPosInInondation = xPosWithSmallerWeight;
                         currentYPosInInondation = yPosWithSmallerWeight;
                         currentInondationWeight = smallerWeight;
 
-                        int gridXCellPos = PosX + (currentXPosInInondation - xPlayerPosInInondation);
-                        int gridYCellPos = PosY + (currentYPosInInondation - yPlayerPosInInondation);
+                        int gridXCellPos = m_playerPosXWhenInondationComputed + (currentXPosInInondation - xPlayerPosInInondation);
+                        int gridYCellPos = m_playerPosYWhenInondationComputed + (currentYPosInInondation - yPlayerPosInInondation);
+
                         Cell cell = m_grid.GetCell(gridXCellPos, gridYCellPos);
                         if (cell != null)
                         {
@@ -266,11 +312,13 @@ public class PlayerComponent : CharacterComponent
                 }
             }
         }
+        /*
         Debug.Log("Computed path size " + path.Count + " to go to Pos X " + PosX + " Pos Y " + PosY + " from PosX " + xPos + " PosY " + yPos);
         foreach(Cell pathCell in path)
         {
             Debug.Log("Cell X " + pathCell.PosX + " Cell Y " + pathCell.PosY);
         }
+        */
         return path.Count > 0;
     }
 }

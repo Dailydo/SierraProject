@@ -10,6 +10,7 @@ public class EnemyComponent : CharacterComponent
     private PlayerComponent m_target = null;
     private Cell m_targetCell = null;
     private Queue<Cell> m_pendingPathfindCell = new Queue<Cell>();
+    public int m_aggroDistanceInTile = 8;
 
     private int m_lastTargetPosX = 0;
     private int m_lastTargetPosY = 0;
@@ -47,7 +48,7 @@ public class EnemyComponent : CharacterComponent
     {
         base.UpdateInternal();
         ComputeTargetCell();
-        DebugDrawToTargetCell();
+        //DebugDrawToTargetCell();
     }
 
     private void ComputeTargetCell()
@@ -56,7 +57,7 @@ public class EnemyComponent : CharacterComponent
         {
             if (m_target.PosX != m_lastTargetPosX || m_target.PosY != m_lastTargetPosY)
             {
-                TryComputePathToTargetCell(m_target.PosX, m_target.PosY);
+                TryComputePathToTargetCell();
                 m_lastTargetPosX = m_target.PosX;
                 m_lastTargetPosY = m_target.PosY;
             }
@@ -86,13 +87,35 @@ public class EnemyComponent : CharacterComponent
             Vector3 targetCellWorldPos = m_grid.GetWorldPosition(m_targetCell.PosX, m_targetCell.PosY);
             Debug.DrawLine(gameObject.transform.position, targetCellWorldPos, Color.green, Time.deltaTime);
         }
+
+        if (m_pendingPathfindCell != null && m_grid != null && gameObject != null)
+        {
+            bool previousPositionSet = false;
+            Vector3 previousPosition = new Vector3();
+            Vector3 currentPosition = new Vector3();
+            foreach(Cell cell in m_pendingPathfindCell)
+            {
+                if (cell != null)
+                {
+                    currentPosition = m_grid.GetWorldPosition(cell.PosX, cell.PosY);
+                }
+
+                if (previousPositionSet == true)
+                {
+                    Debug.DrawLine(previousPosition, currentPosition, Color.blue, Time.deltaTime);
+                }
+
+                previousPosition = currentPosition;
+                previousPositionSet = true;
+            }
+        }
     }
 
-    private void TryComputePathToTargetCell(int targetPosX, int targetPosY)
+    private void TryComputePathToTargetCell()
     {
         if (m_target != null)
         {
-            m_target.GetPathToPlayer(PosX, PosY, m_pendingPathfindCell, 8);
+            m_target.GetPathToPlayer(PosX, PosY, m_pendingPathfindCell, m_aggroDistanceInTile);
         }
     }
 
