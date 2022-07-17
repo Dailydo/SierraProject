@@ -10,6 +10,14 @@ public class IngredientInstanceComponent : MonoBehaviour
     [SerializeField]
     private EIngredientState m_state = EIngredientState.Unused;
 
+    [SerializeField]
+    private bool m_isInteractive = true;
+
+    public bool IsInteractive
+    {
+        get { return m_isInteractive; }
+    }
+
     public bool MatchesContext(EIngredientState state, EPlane plane)
     {
         return MatchesState(state) && IsActiveInPlane(plane);

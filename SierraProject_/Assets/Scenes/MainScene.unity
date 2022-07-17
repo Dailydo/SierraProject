@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13333,7 +13333,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -13404,6 +13404,7 @@ MonoBehaviour:
   m_victoryTextGO: {fileID: 2078564259}
   m_defeatTextGO: {fileID: 2036092802}
   m_swapPlaneDelay: 5
+  m_overridenPlane: 4
 --- !u!114 &591684298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13807,9 +13808,49 @@ MonoBehaviour:
   m_allRequest:
     m_paintAll: 1
     m_paintType: 0
-  m_unitRequestList: []
-  m_horizontalRequestList: []
-  m_verticalRequestList: []
+  m_unitRequestList:
+  - m_cellIndex: 717
+    m_paintType: 3
+  - m_cellIndex: 842
+    m_paintType: 2
+  m_horizontalRequestList:
+  - m_startCellIndex: 880
+    m_endCellIndex: 883
+    m_paintType: 1
+  - m_startCellIndex: 605
+    m_endCellIndex: 608
+    m_paintType: 1
+  - m_startCellIndex: 829
+    m_endCellIndex: 834
+    m_paintType: 1
+  - m_startCellIndex: 664
+    m_endCellIndex: 669
+    m_paintType: 1
+  - m_startCellIndex: 1054
+    m_endCellIndex: 1064
+    m_paintType: 1
+  - m_startCellIndex: 449
+    m_endCellIndex: 453
+    m_paintType: 1
+  - m_startCellIndex: 455
+    m_endCellIndex: 459
+    m_paintType: 1
+  m_verticalRequestList:
+  - m_startCellIndex: 605
+    m_endCellIndex: 825
+    m_paintType: 1
+  - m_startCellIndex: 834
+    m_endCellIndex: 1054
+    m_paintType: 1
+  - m_startCellIndex: 669
+    m_endCellIndex: 449
+    m_paintType: 1
+  - m_startCellIndex: 459
+    m_endCellIndex: 679
+    m_paintType: 1
+  - m_startCellIndex: 844
+    m_endCellIndex: 1064
+    m_paintType: 1
 --- !u!4 &739326170
 Transform:
   m_ObjectHideFlags: 0
@@ -14735,7 +14776,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -16079,7 +16120,17 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
   - m_effect: 0
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16124,6 +16175,7 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16133,6 +16185,7 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16177,6 +16230,7 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16186,6 +16240,7 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16221,11 +16276,16 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16235,6 +16295,7 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16270,9 +16331,16 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16282,6 +16350,7 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16317,35 +16386,7 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 1
   - m_effect: 0
@@ -16400,6 +16441,7 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16454,72 +16496,16 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16529,6 +16515,7 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 3
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16564,11 +16551,16 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16578,6 +16570,7 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16622,6 +16615,7 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16631,6 +16625,7 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16675,6 +16670,7 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16684,6 +16680,7 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -16695,6 +16692,50 @@ MonoBehaviour:
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 0
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0

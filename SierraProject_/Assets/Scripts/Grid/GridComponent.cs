@@ -86,6 +86,18 @@ public class GridComponent : MonoBehaviour
                             Debug.DrawLine(GetCellPosition(x, y + 1), GetCellPosition(x + 1, y), Color.red, Time.deltaTime);
                             Debug.DrawLine(GetCellPosition(x, y), GetCellPosition(x + 1, y + 1), Color.red, Time.deltaTime);
                         }
+
+                        if (cell != null && cell.EnemySpawnPoint)
+                        {
+                            Debug.DrawLine(GetCellPosition(x, y + 1), GetCellPosition(x + 1, y), Color.black, Time.deltaTime);
+                            Debug.DrawLine(GetCellPosition(x, y), GetCellPosition(x + 1, y + 1), Color.black, Time.deltaTime);
+                        }
+
+                        if (cell != null && cell.PlayerSpawnPoint)
+                        {
+                            Debug.DrawLine(GetCellPosition(x, y + 1), GetCellPosition(x + 1, y), Color.blue, Time.deltaTime);
+                            Debug.DrawLine(GetCellPosition(x, y), GetCellPosition(x + 1, y + 1), Color.blue, Time.deltaTime);
+                        }
                     }
 
                     if (m_instantiateDebugText)
@@ -157,6 +169,36 @@ public class GridComponent : MonoBehaviour
             neighbours.Add(neighbour);
 
         return neighbours;
+    }
+
+    public IngredientComponent GetCloseIngredient(int x, int y)
+    {
+        IngredientComponent ingredient = GetIngredientAt(x + 1, y);
+        if (ingredient != null)
+            return ingredient;
+
+        ingredient = GetIngredientAt(x - 1, y);
+        if (ingredient != null)
+            return ingredient;
+
+        ingredient = GetIngredientAt(x, y + 1);
+        if (ingredient != null)
+            return ingredient;
+
+        ingredient = GetIngredientAt(x, y - 1);
+        if (ingredient != null)
+            return ingredient;
+
+        return null;
+    }
+
+    public IngredientComponent GetIngredientAt(int x, int y)
+    {
+        Cell cell = GetCell(x, y);
+        if (cell == null)
+            return null;
+
+        return cell.InnerIngredient;
     }
 
     public Vector3 GetWorldPosition(int x, int y)
