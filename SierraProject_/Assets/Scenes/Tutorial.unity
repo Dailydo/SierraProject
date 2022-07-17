@@ -781,12 +781,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Move with ZQSD + E to interact
+  m_text: 'Move with WASD + E to interact
 
     OR
 
-    Move with the right stick
-    + A to interact'
+    Move with the left stick +
+    A to interact'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 268d2726e35c85b4a91921f1916318be, type: 2}
   m_sharedMaterial: {fileID: -8966940434852046470, guid: 268d2726e35c85b4a91921f1916318be, type: 2}
