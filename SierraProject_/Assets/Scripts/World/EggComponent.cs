@@ -6,7 +6,6 @@ public class EggComponent : ObstacleComponent
     [SerializeField]
     private GameObject m_enemyPrefab = null;
 
-    private WorldComponent m_world = null;
     private Cell m_targetCellForEnemy = null;
     private bool m_hasEnemySpawned = false;
 
@@ -19,10 +18,6 @@ public class EggComponent : ObstacleComponent
             m_targetCellForEnemy = walkableCells[0];
         else
             Debug.LogWarning("An egg did not find any place to spawn enemy");
-
-        m_world = grid.GetComponentInParent<WorldComponent>();
-        if (m_world == null)
-            Debug.LogWarning("An egg did not find the world to spawn enemy in");
     }
 
     protected override void OnInteractedInternal(PlayerComponent player)
@@ -38,9 +33,9 @@ public class EggComponent : ObstacleComponent
 
         if (CurrentState == EIngredientState.Used && !m_hasEnemySpawned)
         {
-            if (m_targetCellForEnemy != null && m_world != null)
+            if (m_targetCellForEnemy != null && World != null)
             {
-                m_world.SpawnEnemy(m_enemyPrefab, m_targetCellForEnemy);
+                World.SpawnEnemy(m_enemyPrefab, m_targetCellForEnemy);
             }
             m_hasEnemySpawned = true;
         }

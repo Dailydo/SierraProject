@@ -38,6 +38,7 @@ public class WorldComponent : MonoBehaviour
     private List<EnemyComponent> m_enemiesInstances = new List<EnemyComponent>();
     private IngredientComponent[] m_ingredients;
 
+    private List<EPlane> m_availablePlanes = new List<EPlane>();
     private EPlane m_currentPlane = EPlane.Base;
     private float m_swapPlaneCooldown;
 
@@ -53,6 +54,7 @@ public class WorldComponent : MonoBehaviour
         m_swapPlaneCooldown = m_swapPlaneDelay;
         m_victory = false;
 
+        m_availablePlanes.Add(EPlane.Base);
         m_HUD.SetCurrentPlane(EPlane.Base);
 
         // TEMP test
@@ -182,14 +184,22 @@ public class WorldComponent : MonoBehaviour
         }
     }
 
+    public void AddAvailablePlane(EPlane plane)
+    {
+        if (plane != EPlane.Count && !m_availablePlanes.Contains(plane))
+        {
+            m_availablePlanes.Add(plane);
+        }
+    }
+
     void UpdateCurrentPlane()
     {
-        if (m_swapPlaneCooldown > 0.0f)
+        if (m_swapPlaneCooldown > 0.0f && m_availablePlanes.Count > 1)
         {
             m_swapPlaneCooldown -= Time.deltaTime;
             if (m_swapPlaneCooldown <= 0.0f)
             {
-                EPlane newPlane = m_overridenPlane != EPlane.Count ? m_overridenPlane : (EPlane)Random.Range(0, (int)EPlane.Count);
+                EPlane newPlane = m_overridenPlane != EPlane.Count ? m_overridenPlane : m_availablePlanes[Random.Range(0, m_availablePlanes.Count)];
                 SetCurrentPlane(newPlane);
 
                 m_swapPlaneCooldown = m_swapPlaneDelay;
