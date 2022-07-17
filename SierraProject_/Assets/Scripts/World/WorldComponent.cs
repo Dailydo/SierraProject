@@ -45,8 +45,6 @@ public class WorldComponent : MonoBehaviour
     private EPlane m_currentPlane = EPlane.Base;
     private float m_swapPlaneCooldown;
 
-    private bool m_victory = false;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +53,6 @@ public class WorldComponent : MonoBehaviour
         InstantiatePlayer();
 
         m_swapPlaneCooldown = m_swapPlaneDelay;
-        m_victory = false;
 
         m_availablePlanes.Add(EPlane.Base);
         m_HUD.SetCurrentPlane(EPlane.Base);
@@ -146,13 +143,22 @@ public class WorldComponent : MonoBehaviour
             Application.Quit();
         }
 
-        if (m_playerInstance.IsDead && m_playerInstance.gameObject.activeSelf)
+        if (m_playerInstance.gameObject.activeSelf)
         {
-            m_HUD.SetDefeatTextActive(true);
-            m_playerInstance.gameObject.SetActive(false);
+            if (m_playerInstance.IsDead)
+            {
+                m_HUD.SetDefeatTextActive(true);
+                m_playerInstance.gameObject.SetActive(false);
+            }
+
+            if (m_playerInstance.Victory)
+            {
+                m_HUD.SetVictoryTextActive(true);
+                m_playerInstance.gameObject.SetActive(false);
+            }
         }
 
-        if (m_playerInstance.IsDead || m_victory)
+        if (m_playerInstance.IsDead || m_playerInstance.Victory)
         {
             return;
         }
@@ -264,7 +270,7 @@ public class WorldComponent : MonoBehaviour
             return;
         }
 
-        if (!cell.Walkable)
+        if (!cell.Walkable && !m_playerInstance.CheatGhostMode)
             return;
 
         SetCharacterPos(m_playerInstance, cell, false);
@@ -301,8 +307,7 @@ public class WorldComponent : MonoBehaviour
             // check victory condition
             if (cell.Effect == ECellEffect.Victory)
             {
-                m_HUD.SetVictoryTextActive(true);
-                m_victory = true;
+                m_playerInstance.Victory = true;
             }
         }
         else
