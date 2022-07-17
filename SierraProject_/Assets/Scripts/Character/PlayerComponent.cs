@@ -16,8 +16,6 @@ public class PlayerComponent : CharacterComponent
     private int m_yAggroRadius = 8;
     private int m_inondationMapXSize = -1;
     private int m_inondationMapYSize = -1;
-    private float m_inondationMapComputeCooldown = 2f;
-    private float m_inondationMapTimer = -1f;
     private int[,] m_inondationMap = null;
     int m_playerPosXWhenInondationComputed = -1;
     int m_playerPosYWhenInondationComputed = -1;
@@ -72,19 +70,19 @@ public class PlayerComponent : CharacterComponent
     protected override void UpdateInternal()
     {
         base.UpdateInternal();
+    }
+
+    protected override void OnMoveInternal()
+    {
+        base.OnMoveInternal();
         UpdateInondationMap();
     }
  
     public void UpdateInondationMap()
     {
-        m_inondationMapTimer -= Time.deltaTime;
-        if (m_inondationMapTimer < 0f)
-        {
-            m_inondationMapTimer = m_inondationMapComputeCooldown;
-            ResetInondationMap();
-            ComputeInondationMap();
-            DisplayDebugInondationMap();
-        }
+        ResetInondationMap();
+        ComputeInondationMap();
+        //DisplayDebugInondationMap();
     }
 
     public void InitInondationMap()
@@ -93,7 +91,6 @@ public class PlayerComponent : CharacterComponent
         {
             m_inondationMapXSize = m_xAggroRadius * 2 + 1;
             m_inondationMapYSize = m_yAggroRadius * 2 + 1;
-            m_inondationMapTimer = m_inondationMapComputeCooldown;
             m_inondationMap = new int[m_inondationMapXSize, m_inondationMapYSize];
         }
     }
@@ -308,11 +305,13 @@ public class PlayerComponent : CharacterComponent
                 }
             }
         }
+        /*
         Debug.Log("Computed path size " + path.Count + " to go to Pos X " + PosX + " Pos Y " + PosY + " from PosX " + xPos + " PosY " + yPos);
         foreach(Cell pathCell in path)
         {
             Debug.Log("Cell X " + pathCell.PosX + " Cell Y " + pathCell.PosY);
         }
+        */
         return path.Count > 0;
     }
 }
