@@ -26,10 +26,7 @@ public class WorldComponent : MonoBehaviour
     private GridComponent m_grid = null;
 
     [SerializeField]
-    private GameObject m_victoryTextGO = null;
-
-    [SerializeField]
-    private GameObject m_defeatTextGO = null;
+    private HUDComponent m_HUD = null;
 
     [SerializeField]
     private float m_swapPlaneDelay = 5.0f;
@@ -52,11 +49,11 @@ public class WorldComponent : MonoBehaviour
         m_grid.InitCells();
         InitIngredients();
         InstantiatePlayer();
-        InitVictoryText();
-        InitDefeatText();
 
         m_swapPlaneCooldown = m_swapPlaneDelay;
         m_victory = false;
+
+        m_HUD.SetCurrentPlane(EPlane.Base);
 
         // TEMP test
         InstantiateEnemy();
@@ -99,30 +96,6 @@ public class WorldComponent : MonoBehaviour
         else
         {
             Debug.LogError("Cannot instantiate player prefab");
-        }
-    }
-
-    void InitVictoryText()
-    {
-        if (m_victoryTextGO != null)
-        {
-            m_victoryTextGO.SetActive(false);
-        }
-        else
-        {
-            Debug.LogError("No victory text GO filled");
-        }
-    }
-
-    void InitDefeatText()
-    {
-        if (m_defeatTextGO != null)
-        {
-            m_defeatTextGO.SetActive(false);
-        }
-        else
-        {
-            Debug.LogError("No defeat text GO filled");
         }
     }
 
@@ -278,7 +251,7 @@ public class WorldComponent : MonoBehaviour
             // check victory condition
             if (cell.Effect == ECellEffect.Victory)
             {
-                m_victoryTextGO.SetActive(true);
+                m_HUD.SetVictoryTextActive(true);
                 m_victory = true;
             }
         }
@@ -296,7 +269,7 @@ public class WorldComponent : MonoBehaviour
 
         if (m_playerInstance.IsDead)
         {
-            m_defeatTextGO.SetActive(true);
+            m_HUD.SetDefeatTextActive(true);
             m_playerInstance.gameObject.SetActive(false);
         }
     }
@@ -323,6 +296,7 @@ public class WorldComponent : MonoBehaviour
             return;
 
         m_currentPlane = newPlane;
+        m_HUD.SetCurrentPlane(newPlane);
 
         foreach (IngredientComponent ingredient in m_ingredients)
         {
