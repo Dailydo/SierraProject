@@ -73,12 +73,16 @@ public class IngredientComponent : MonoBehaviour
         OnPlaneChanged();
     }
 
+    protected virtual void OnPlaneChanged()
+    { }
+
     public void PowerOn()
     {
         m_isPowerOn = true;
+        OnPowerOn();
     }
 
-    protected virtual void OnPlaneChanged()
+    protected virtual void OnPowerOn()
     { }
 
     private void UpdateInstancesFromContext()
