@@ -38,6 +38,7 @@ public class WorldComponent : MonoBehaviour
     private List<EnemyComponent> m_enemiesInstances = new List<EnemyComponent>();
     private IngredientComponent[] m_ingredients;
 
+    private List<EPlane> m_availablePlanes = new List<EPlane>();
     private EPlane m_currentPlane = EPlane.Base;
     private float m_swapPlaneCooldown;
 
@@ -53,10 +54,13 @@ public class WorldComponent : MonoBehaviour
         m_swapPlaneCooldown = m_swapPlaneDelay;
         m_victory = false;
 
+        m_availablePlanes.Add(EPlane.Base);
         m_HUD.SetCurrentPlane(EPlane.Base);
 
         // TEMP test
-        InstantiateEnemy();
+        Cell defaultEnemySpawnPoint = m_grid.GetSpecificCell(ECellEffect.EnemySpawnPoint);
+        if (defaultEnemySpawnPoint != null)
+            SpawnEnemy(m_enemyPrefab, defaultEnemySpawnPoint);
     }
 
     void InitIngredients()
@@ -99,42 +103,45 @@ public class WorldComponent : MonoBehaviour
         }
     }
 
-    void InstantiateEnemy()
+    public void SpawnEnemy(GameObject enemyPrefab, Cell spawnPoint)
     {
-        GameObject enemyGO = Instantiate(m_enemyPrefab);
-        if (enemyGO != null)
+        if (spawnPoint != null)
         {
-            EnemyComponent enemyInstance = enemyGO.GetComponent<EnemyComponent>();
-            if (enemyInstance != null)
+            GameObject enemyGO = Instantiate(enemyPrefab);
+            if (enemyGO != null)
             {
-                enemyInstance.transform.parent = transform; // later, will be the proper grid
-
-                Cell spawnPoint = m_grid.GetSpecificCell(ECellEffect.EnemySpawnPoint);
-                if (spawnPoint != null)
+                EnemyComponent enemyInstance = enemyGO.GetComponent<EnemyComponent>();
+                if (enemyInstance != null)
                 {
+                    enemyInstance.transform.parent = transform; // later, will be the proper grid
+
                     SetCharacterPos(enemyInstance, spawnPoint, true);
                     enemyInstance.Init(m_grid, m_playerInstance);
                     m_enemiesInstances.Add(enemyInstance);
                 }
                 else
                 {
-                    Destroy(enemyGO);
-                    Debug.LogError("Cannot find enemy spawn point");
+                    Debug.LogError("No EnemyComponent on enemy");
                 }
             }
             else
             {
-                Debug.LogError("No EnemyComponent on enemy");
+                Debug.LogError("Cannot instantiate enemy prefab");
             }
         }
         else
         {
-            Debug.LogError("Cannot instantiate enemy prefab");
+            Debug.LogError("Need a valid spawn point to spawn enemy");
         }
     }
 
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
         if (m_playerInstance.IsDead || m_victory)
             return;
 
@@ -182,14 +189,22 @@ public class WorldComponent : MonoBehaviour
         }
     }
 
+    public void AddAvailablePlane(EPlane plane)
+    {
+        if (plane != EPlane.Count && !m_availablePlanes.Contains(plane))
+        {
+            m_availablePlanes.Add(plane);
+        }
+    }
+
     void UpdateCurrentPlane()
     {
-        if (m_swapPlaneCooldown > 0.0f)
+        if (m_swapPlaneCooldown > 0.0f && m_availablePlanes.Count > 1)
         {
             m_swapPlaneCooldown -= Time.deltaTime;
             if (m_swapPlaneCooldown <= 0.0f)
             {
-                EPlane newPlane = m_overridenPlane != EPlane.Count ? m_overridenPlane : (EPlane)Random.Range(0, (int)EPlane.Count);
+                EPlane newPlane = m_overridenPlane != EPlane.Count ? m_overridenPlane : m_availablePlanes[Random.Range(0, m_availablePlanes.Count)];
                 SetCurrentPlane(newPlane);
 
                 m_swapPlaneCooldown = m_swapPlaneDelay;
@@ -287,7 +302,7 @@ public class WorldComponent : MonoBehaviour
     {
         IngredientComponent closeIngredient = m_grid.GetCloseIngredient(m_playerInstance.PosX, m_playerInstance.PosY);
         if (closeIngredient != null)
-            closeIngredient.OnInteracted();
+            closeIngredient.OnInteracted(m_playerInstance);
     }
 
     private void SetCurrentPlane(EPlane newPlane)

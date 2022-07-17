@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractive: 1
+  m_enemyPrefab: {fileID: 6586637111690868608, guid: b9be3c17903b8774283e540bb2011f8a, type: 3}
 --- !u!1 &2437485426160285796
 GameObject:
   m_ObjectHideFlags: 0

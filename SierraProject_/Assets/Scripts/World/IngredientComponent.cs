@@ -33,7 +33,12 @@ public class IngredientComponent : MonoBehaviour
         m_currentState = EIngredientState.Unused;
         m_currentPlane = EPlane.Base;
         UpdateInstancesFromContext();
+
+        OnInit(grid);
     }
+
+    protected virtual void OnInit(GridComponent grid)
+    { }
 
     public virtual ECellEffect GetCellEffect()
     {
@@ -43,6 +48,11 @@ public class IngredientComponent : MonoBehaviour
     public EIngredientState CurrentState
     {
         get { return m_currentState; }
+    }
+
+    protected Cell GetCell()
+    {
+        return m_cell;
     }
 
     public void SetUsed()
@@ -55,7 +65,11 @@ public class IngredientComponent : MonoBehaviour
     {
         m_currentPlane = plane;
         UpdateInstancesFromContext();
+        OnPlaneChanged();
     }
+
+    protected virtual void OnPlaneChanged()
+    { }
 
     private void UpdateInstancesFromContext()
     {
@@ -92,14 +106,19 @@ public class IngredientComponent : MonoBehaviour
         return true;
     }
 
-    public virtual void OnInteracted()
+    public void OnInteracted(PlayerComponent player)
     {
         if (IsInteractive())
         {
             SetUsed();
+            OnInteractedInternal(player);
+
             Debug.Log("Player has interacted with " + name);
         }
     }
+
+    protected virtual void OnInteractedInternal(PlayerComponent player)
+    { }
 
     public bool IsInteractive()
     {
