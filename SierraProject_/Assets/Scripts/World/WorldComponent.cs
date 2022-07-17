@@ -17,9 +17,6 @@ public class WorldComponent : MonoBehaviour
     private GameObject m_playerPrefab = null;
 
     [SerializeField]
-    private GameObject m_enemyPrefab = null;
-
-    [SerializeField]
     private Transform m_cameraTransform = null;
 
     [SerializeField]
