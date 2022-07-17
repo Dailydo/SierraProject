@@ -20,7 +20,7 @@ public class Cell
 
     private int m_posX = 0;
     private int m_posY = 0;
-    private bool m_isLetal = false;
+    private bool m_isLethal = false;
 
     public bool Walkable
     {
@@ -59,10 +59,10 @@ public class Cell
         get { return m_posY; }
     }
 
-    public bool IsLetal
+    public bool IsLethal
     {
-        get { return m_isLetal; }
-        set { m_isLetal = value; }
+        get { return m_isLethal; }
+        set { m_isLethal = value; }
     }
 
     public IngredientComponent InnerIngredient

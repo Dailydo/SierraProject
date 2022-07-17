@@ -27,6 +27,11 @@ public class CharacterComponent : MonoBehaviour
         set { m_posY = value; }
     }
 
+    public SpriteRenderer CharacterSprite
+    {
+        get { return m_spriteRenderer; }
+    }
+
     private void Start()
     {
         m_timeBeforeNextMove = m_moveDelayInSeconds;

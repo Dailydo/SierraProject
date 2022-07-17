@@ -202,7 +202,7 @@ public class WorldComponent : MonoBehaviour
     {
         foreach (EnemyComponent enemy in m_enemiesInstances)
         {
-            if (enemy.CanMove())
+            if (enemy.CanMove() && enemy.gameObject.activeSelf)
             {
                 SetCharacterPos(enemy, enemy.TargetCell, false);
             }
@@ -270,7 +270,7 @@ public class WorldComponent : MonoBehaviour
         if (character == m_playerInstance)
         {
             // check cell danger
-            if (cell.IsLetal)
+            if (cell.IsLethal)
             {
                 m_playerInstance.TakeDamage();
             }
@@ -291,7 +291,7 @@ public class WorldComponent : MonoBehaviour
             }
 
             // update cell danger
-            cell.IsLetal = true;
+            cell.IsLethal = true;
         }
 
         if (m_playerInstance.IsDead)
@@ -306,7 +306,7 @@ public class WorldComponent : MonoBehaviour
         if (character is EnemyComponent)
         {
             // remove cell danger
-            cell.IsLetal = false;
+            cell.IsLethal = false;
         }
     }
 
@@ -327,6 +327,15 @@ public class WorldComponent : MonoBehaviour
         foreach (IngredientComponent ingredient in m_ingredients)
         {
             ingredient.SetCurrentPlane(newPlane);
+        }
+
+        foreach (EnemyComponent enemy in m_enemiesInstances)
+        {
+            bool lethal = enemy.LethalPlane == newPlane;
+            Cell enemyCell = m_grid.GetCell(enemy.PosX, enemy.PosY);
+            if (enemyCell != null)
+                enemyCell.IsLethal = lethal;
+            enemy.gameObject.SetActive(lethal);
         }
 
         // TODO update tilemap
