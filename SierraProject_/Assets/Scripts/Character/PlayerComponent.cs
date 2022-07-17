@@ -180,7 +180,7 @@ public class PlayerComponent : CharacterComponent
         if (m_inondationMap != null)
         {
             string debugString = new string("");
-            for(int y = 0; y < m_inondationMapYSize; ++y)
+            for(int y = m_inondationMapYSize - 1; y >= 0; --y)
             {
                 for(int x = 0; x < m_inondationMapXSize; ++x)
                 {
