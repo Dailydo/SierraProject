@@ -10,6 +10,9 @@ public class BowlComponent : ObstacleComponent
         base.OnInteractedInternal(player);
 
         if (m_linkedDoor != null)
+        {
             m_linkedDoor.SetUsed();
+            player.TakeDamage();
+        }
     }
 }
