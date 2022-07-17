@@ -45,6 +45,14 @@ public class WorldComponent : MonoBehaviour
     private EPlane m_currentPlane = EPlane.Base;
     private float m_swapPlaneCooldown;
 
+    private bool m_isPowerOn = false;
+
+    public bool IsPowerOn
+    {
+        get { return m_isPowerOn; }
+        set { m_isPowerOn = value; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,14 +61,10 @@ public class WorldComponent : MonoBehaviour
         InstantiatePlayer();
 
         m_swapPlaneCooldown = m_swapPlaneDelay;
+        m_isPowerOn = false;
 
         m_availablePlanes.Add(EPlane.Base);
         m_HUD.SetCurrentPlane(EPlane.Base);
-
-        // TEMP test
-        Cell defaultEnemySpawnPoint = m_grid.GetSpecificCell(ECellEffect.EnemySpawnPoint);
-        if (defaultEnemySpawnPoint != null)
-            SpawnEnemy(m_enemyPrefab, defaultEnemySpawnPoint);
     }
 
     void InitIngredients()
