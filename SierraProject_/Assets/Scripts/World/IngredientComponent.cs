@@ -14,12 +14,16 @@ public class IngredientComponent : MonoBehaviour
     [SerializeField]
     private bool m_needsPower = false;
 
+    [SerializeField]
+    private AudioClip m_interactSound;
+
     IngredientInstanceComponent[] m_instances;
 
     private Cell m_cell = null;
     private EPlane m_currentPlane = EPlane.Base;
     private EIngredientState m_currentState = EIngredientState.Unused;
     private bool m_isPowerOn = false;
+    private AudioSource m_audioSource;
 
     public void Init(GridComponent grid)
     {
@@ -38,6 +42,8 @@ public class IngredientComponent : MonoBehaviour
         m_currentPlane = EPlane.Base;
         m_isPowerOn = false;
         UpdateInstancesFromContext();
+
+        m_audioSource = GetComponent<AudioSource>();
 
         OnInit(grid);
     }
@@ -125,6 +131,7 @@ public class IngredientComponent : MonoBehaviour
         if (IsInteractive())
         {
             SetUsed();
+            PlaySounds(); 
             OnInteractedInternal(player);
 
             Debug.Log("Player has interacted with " + name);
@@ -144,5 +151,20 @@ public class IngredientComponent : MonoBehaviour
             return activeInstance.IsInteractive;
 
         return m_isInteractive;
+    }
+
+    public void PlaySounds()
+    {
+        if (m_audioSource)
+        {
+            if (m_interactSound)
+            {
+                m_audioSource.clip = m_interactSound;
+                m_audioSource.Play();
+            }
+        }
+        else
+            Debug.Log("No audio source component in " + name);
+
     }
 }
