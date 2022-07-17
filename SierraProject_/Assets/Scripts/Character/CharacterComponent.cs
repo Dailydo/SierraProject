@@ -7,8 +7,8 @@ public class CharacterComponent : MonoBehaviour
 
     private SpriteRenderer m_spriteRenderer = null;
 
-    private int m_posX = 0;
-    private int m_posY = 0;
+    protected int m_posX = 0;
+    protected int m_posY = 0;
     private float m_timeBeforeNextMove = 0.0f;
 
     private Vector3 m_currentWorldPos = Vector3.zero;
