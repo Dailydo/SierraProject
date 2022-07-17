@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum EPlane
 {
@@ -168,6 +169,11 @@ public class WorldComponent : MonoBehaviour
 
         if (m_playerInstance.IsDead || m_playerInstance.Victory)
         {
+            if (Input.anyKeyDown)
+            {
+                SceneManager.LoadScene("Menu");
+            }
+
             return;
         }
 
