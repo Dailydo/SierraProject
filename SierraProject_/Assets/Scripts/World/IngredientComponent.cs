@@ -46,6 +46,9 @@ public class IngredientComponent : MonoBehaviour
         m_audioSource = GetComponent<AudioSource>();
 
         OnInit(grid);
+
+        if (m_needsPower)
+            gameObject.SetActive(false);
     }
 
     protected virtual void OnInit(GridComponent grid)
@@ -85,6 +88,9 @@ public class IngredientComponent : MonoBehaviour
     public void PowerOn()
     {
         m_isPowerOn = true;
+        if (m_needsPower)
+            gameObject.SetActive(true);
+
         OnPowerOn();
     }
 
