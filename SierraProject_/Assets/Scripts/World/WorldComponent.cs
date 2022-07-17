@@ -171,6 +171,11 @@ public class WorldComponent : MonoBehaviour
         {
             TryInteract();
         }
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     void UpdateEnemies()
