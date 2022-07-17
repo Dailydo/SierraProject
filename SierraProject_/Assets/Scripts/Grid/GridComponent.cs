@@ -236,16 +236,18 @@ public class GridComponent : MonoBehaviour
 
     private void InstantiateCellDebugText(int x, int y)
     {
-        GameObject textGO = Instantiate(m_cellDebugTextPrefab, GetWorldPosition(x, y), Quaternion.identity, m_canvasGO.transform);
-        if (textGO != null)
+        int idx = GetCellGlobalIndexFromXYIndex(x, y);
+        if (idx != -1)
         {
-            int idx = GetCellGlobalIndexFromXYIndex(x, y);
+            GameObject textGO = Instantiate(m_cellDebugTextPrefab, GetWorldPosition(x, y), Quaternion.identity, m_canvasGO.transform);
+            if (textGO != null)
+            {
+                textGO.name = "CellDebugText -> " + idx.ToString();
 
-            textGO.name = "CellDebugText -> " + idx.ToString();
-
-            TextMeshProUGUI txtMesh = textGO.GetComponent<TextMeshProUGUI>();
-            if (txtMesh != null)
-                txtMesh.text = idx.ToString();
+                TextMeshProUGUI txtMesh = textGO.GetComponent<TextMeshProUGUI>();
+                if (txtMesh != null)
+                    txtMesh.text = idx.ToString();
+            }
         }
     }
 }

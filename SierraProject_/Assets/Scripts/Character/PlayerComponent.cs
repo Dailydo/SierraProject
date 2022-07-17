@@ -78,7 +78,6 @@ public class PlayerComponent : CharacterComponent
         m_inondationMapTimer -= Time.deltaTime;
         if (m_inondationMapTimer < 0f)
         {
-            Debug.Log("Compute Inondation");
             m_inondationMapTimer = m_inondationMapComputeCooldown;
             ResetInondationMap();
             ComputeInondationMap();
@@ -195,5 +194,83 @@ public class PlayerComponent : CharacterComponent
             }
             Debug.Log(debugString);
         }
+    }
+
+    public bool GetPathToPlayer(int xPos, int yPos, Queue<Cell> path, int maxWeight)
+    {
+        path.Clear();
+
+        if (path != null && maxWeight > 0 && m_grid != null)
+        {
+            int xOffset = xPos - PosX;
+            int yOffset = yPos - PosY;
+
+            int xPlayerPosInInondation = m_xAggroRadius;
+            int yPlayerPosInInondation = m_yAggroRadius;
+
+            // Is in inondation map patch
+            if (Mathf.Abs(xOffset) <= m_xAggroRadius && Mathf.Abs(yOffset) <= m_yAggroRadius)
+            {
+                int currentXPosInInondation = xPlayerPosInInondation + xOffset;
+                int currentYPosInInondation = yPlayerPosInInondation + yOffset;
+                int currentInondationWeight = m_inondationMap[currentXPosInInondation, currentYPosInInondation];
+                if (currentInondationWeight > 0 && currentInondationWeight <= maxWeight)
+                {
+                    // A path is existing
+                    do
+                    {
+                        int xPosWithSmallerWeight = currentXPosInInondation;
+                        int yPosWithSmallerWeight = currentYPosInInondation;
+                        int smallerWeight = currentInondationWeight;
+
+                        if (m_inondationMap[currentXPosInInondation - 1, currentYPosInInondation] < smallerWeight)
+                        {
+                            xPosWithSmallerWeight = currentXPosInInondation - 1;
+                            yPosWithSmallerWeight = currentYPosInInondation;  
+                            smallerWeight =  m_inondationMap[xPosWithSmallerWeight, yPosWithSmallerWeight];      
+                        }
+
+                        if (m_inondationMap[currentXPosInInondation + 1, currentYPosInInondation] < smallerWeight)
+                        {
+                            xPosWithSmallerWeight = currentXPosInInondation + 1;
+                            yPosWithSmallerWeight = currentYPosInInondation;  
+                            smallerWeight =  m_inondationMap[xPosWithSmallerWeight, yPosWithSmallerWeight];     
+                        }
+
+                        if (m_inondationMap[currentXPosInInondation, currentYPosInInondation - 1] < smallerWeight)
+                        {
+                            xPosWithSmallerWeight = currentXPosInInondation;
+                            yPosWithSmallerWeight = currentYPosInInondation - 1;  
+                            smallerWeight =  m_inondationMap[xPosWithSmallerWeight, yPosWithSmallerWeight];        
+                        }
+
+                        if (m_inondationMap[currentXPosInInondation, currentYPosInInondation + 1] < smallerWeight)
+                        {
+                            xPosWithSmallerWeight = currentXPosInInondation;
+                            yPosWithSmallerWeight = currentYPosInInondation + 1;  
+                            smallerWeight =  m_inondationMap[xPosWithSmallerWeight, yPosWithSmallerWeight];       
+                        }
+
+                        currentXPosInInondation = xPosWithSmallerWeight;
+                        currentYPosInInondation = yPosWithSmallerWeight;
+                        currentInondationWeight = smallerWeight;
+
+                        int gridXCellPos = PosX + (currentXPosInInondation - xPlayerPosInInondation);
+                        int gridYCellPos = PosY + (currentYPosInInondation - yPlayerPosInInondation);
+                        Cell cell = m_grid.GetCell(gridXCellPos, gridYCellPos);
+                        if (cell != null)
+                        {
+                            path.Enqueue(cell);
+                        }
+                    }while(currentInondationWeight > 0);
+                }
+            }
+        }
+        Debug.Log("Computed path size " + path.Count + " to go to Pos X " + PosX + " Pos Y " + PosY + " from PosX " + xPos + " PosY " + yPos);
+        foreach(Cell pathCell in path)
+        {
+            Debug.Log("Cell X " + pathCell.PosX + " Cell Y " + pathCell.PosY);
+        }
+        return path.Count > 0;
     }
 }
