@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1710,7 +1710,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1461329680219752201, guid: 76c9c22d0a234ed4fa995c890b65fd63, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1461329680219752204, guid: 76c9c22d0a234ed4fa995c890b65fd63, type: 3}
       propertyPath: m_Size.x
@@ -35400,8 +35400,8 @@ MonoBehaviour:
   - m_effect: 4
   - m_effect: 4
   - m_effect: 4
-  - m_effect: 4
-  - m_effect: 4
+  - m_effect: 0
+  - m_effect: 0
   - m_effect: 0
   - m_effect: 4
   - m_effect: 4
@@ -36826,9 +36826,9 @@ MonoBehaviour:
   - m_effect: 4
   - m_effect: 0
   - m_effect: 4
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -37914,7 +37914,7 @@ MonoBehaviour:
   m_cellDebugTextPrefab: {fileID: 1382448948823928842, guid: 68969afc95e87b444a55798779d576b3, type: 3}
   m_canvasGO: {fileID: 122072454}
   m_instantiateDebugText: 0
-  m_renderGridDebug: 1
+  m_renderGridDebug: 0
 --- !u!1001 &2115914517
 PrefabInstance:
   m_ObjectHideFlags: 0
