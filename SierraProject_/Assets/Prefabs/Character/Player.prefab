@@ -151,8 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6765d6a77a7c0cd4f806599caa384b7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_moveDelayInSeconds: 0.25
+  m_moveDelayInSeconds: 0.22
   m_woundedTimeToMoveFactor: 1.6
+  m_cheatGhostMode: 0
 --- !u!95 &3402561145194394545
 Animator:
   serializedVersion: 4
