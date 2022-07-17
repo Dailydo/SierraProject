@@ -155,18 +155,17 @@ public class WorldComponent : MonoBehaviour
 
         UpdateUIInputs();
 
-        if (m_playerInstance.IsDead || m_victory)
         if (m_playerInstance.gameObject.activeSelf)
         {
             if (m_playerInstance.IsDead)
             {
-                m_HUD.SetDefeatTextActive(true);
+                m_HUD.RequestDisplayText(m_defeatText);
                 m_playerInstance.gameObject.SetActive(false);
             }
 
             if (m_playerInstance.Victory)
             {
-                m_HUD.SetVictoryTextActive(true);
+                m_HUD.RequestDisplayText(m_victoryText);
                 m_playerInstance.gameObject.SetActive(false);
             }
         }

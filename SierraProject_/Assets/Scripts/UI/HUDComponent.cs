@@ -90,14 +90,4 @@ public class HUDComponent : MonoBehaviour
     {
         return m_currentDie >= 0 && m_currentDie < m_diceGO.Length && m_diceGO[m_currentDie] != null;
     }
-
-    public void SetVictoryTextActive(bool active)
-    {
-        m_victoryTextGO.SetActive(active);
-    }
-
-    public void SetDefeatTextActive(bool active)
-    {
-        m_defeatTextGO.SetActive(active);
-    }
 }
