@@ -34,6 +34,9 @@ public class WorldComponent : MonoBehaviour
     [SerializeField]
     private float m_swapPlaneDelay = 5.0f;
 
+    [SerializeField]
+    private EPlane m_overridenPlane = EPlane.Count;
+
     private PlayerComponent m_playerInstance = null;
     private List<EnemyComponent> m_enemiesInstances = new List<EnemyComponent>();
     private IngredientComponent[] m_ingredients;
@@ -169,22 +172,22 @@ public class WorldComponent : MonoBehaviour
 
     void UpdateInputs()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q))
         {
             MovePlayer(-1, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
             MovePlayer(1, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKey(KeyCode.Z))
         {
             MovePlayer(0, 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             MovePlayer(0, -1);
         }
@@ -208,8 +211,8 @@ public class WorldComponent : MonoBehaviour
             m_swapPlaneCooldown -= Time.deltaTime;
             if (m_swapPlaneCooldown <= 0.0f)
             {
-                int newPlaneIdx = Random.Range(0, (int)EPlane.Count);
-                SetCurrentPlane((EPlane)newPlaneIdx);
+                EPlane newPlane = m_overridenPlane != EPlane.Count ? m_overridenPlane : (EPlane)Random.Range(0, (int)EPlane.Count);
+                SetCurrentPlane(newPlane);
 
                 m_swapPlaneCooldown = m_swapPlaneDelay;
             }
@@ -304,6 +307,9 @@ public class WorldComponent : MonoBehaviour
 
     private void SetCurrentPlane(EPlane newPlane)
     {
+        if (m_currentPlane == newPlane)
+            return;
+
         m_currentPlane = newPlane;
 
         foreach (IngredientComponent ingredient in m_ingredients)
@@ -312,6 +318,8 @@ public class WorldComponent : MonoBehaviour
         }
 
         // TODO update tilemap
+
+        Debug.Log("Current plane updated to " + newPlane.ToString());
     }
 
     private void LateUpdate()

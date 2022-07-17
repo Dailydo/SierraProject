@@ -5,6 +5,8 @@ public class CharacterComponent : MonoBehaviour
     [SerializeField]
     private float m_moveDelayInSeconds = 1.0f;
 
+    private SpriteRenderer m_spriteRenderer = null;
+
     private int m_posX = 0;
     private int m_posY = 0;
     private float m_timeBeforeNextMove = 0.0f;
@@ -29,6 +31,8 @@ public class CharacterComponent : MonoBehaviour
     {
         m_timeBeforeNextMove = m_moveDelayInSeconds;
         m_currentWorldPos = transform.position;
+
+        m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Update()
@@ -72,6 +76,11 @@ public class CharacterComponent : MonoBehaviour
         m_timeBeforeNextMove = m_moveDelayInSeconds;
         m_targetWorldPos = targetWorldPos;
         m_isMoving = true;
+
+        if (!Mathf.Approximately(targetWorldPos.x - transform.position.x, 0.0f))
+        {
+            m_spriteRenderer.flipX = targetWorldPos.x < transform.position.x;
+        }
 
         OnMoveInternal();
     }
