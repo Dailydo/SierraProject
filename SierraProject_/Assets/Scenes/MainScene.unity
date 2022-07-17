@@ -760,6 +760,8 @@ MonoBehaviour:
   - {fileID: 530818062}
   - {fileID: 1016670178}
   - {fileID: 1100032940}
+  m_rotatingDieDuration: 2.2
+  m_rotatingDieSpeed: -450
 --- !u!1 &122072454
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +872,6 @@ Transform:
   - {fileID: 851181863}
   - {fileID: 210397231}
   - {fileID: 1749580334}
-  - {fileID: 37446975}
   m_Father: {fileID: 1734535352}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -31149,8 +31150,9 @@ MonoBehaviour:
   m_cameraTransform: {fileID: 330333236}
   m_grid: {fileID: 2091455911}
   m_HUD: {fileID: 116491137}
-  m_swapPlaneDelay: 5
+  m_swapPlaneDelay: 7
   m_overridenPlane: 4
+  m_forceChangePlaneWhenPossible: 1
 --- !u!1001 &549318252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42792,7 +42794,7 @@ MonoBehaviour:
   m_cellDebugTextPrefab: {fileID: 1382448948823928842, guid: 68969afc95e87b444a55798779d576b3, type: 3}
   m_canvasGO: {fileID: 122072454}
   m_instantiateDebugText: 0
-  m_renderGridDebug: 1
+  m_renderGridDebug: 0
 --- !u!1001 &2115914517
 PrefabInstance:
   m_ObjectHideFlags: 0
