@@ -114,7 +114,6 @@ public class EnemyComponent : CharacterComponent
     {
         if (m_target != null)
         {
-            Debug.Log("Enemy Global Index " + m_grid.GetCellGlobalIndexFromXYIndex(PosX, PosY));
             m_target.GetPathToPlayer(PosX, PosY, m_pendingPathfindCell, 8);
         }
     }

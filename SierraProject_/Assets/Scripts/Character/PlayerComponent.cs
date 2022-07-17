@@ -178,7 +178,6 @@ public class PlayerComponent : CharacterComponent
 
     private void DisplayDebugInondationMap()
     {
-        Debug.Log("Inondation Map DEBUG Size " + m_inondationMapXSize + " " + m_inondationMapYSize);
         if (m_inondationMap != null)
         {
             string debugString = new string("");
@@ -211,14 +210,13 @@ public class PlayerComponent : CharacterComponent
             int yPlayerPosInInondation = m_yAggroRadius;
 
             // Is in inondation map patch
-            Debug.Log("XOffset " + xOffset + " YOffset " + yOffset);
             if (Mathf.Abs(xOffset) <= m_xAggroRadius && Mathf.Abs(yOffset) <= m_yAggroRadius)
             {
                 int currentXPosInInondation = xPlayerPosInInondation + xOffset;
                 int currentYPosInInondation = yPlayerPosInInondation + yOffset;
                 int currentInondationWeight = m_inondationMap[currentXPosInInondation, currentYPosInInondation];
 
-                Debug.Log("Get path to player from enemy Pos X " + xPos + " Pos Y " + yPos + " Global Index " + m_grid.GetCellGlobalIndexFromXYIndex(xPos, yPos) + " Inondation X " + currentXPosInInondation + " Inondation Y " + currentYPosInInondation + " Inondation Weight " + currentInondationWeight + " Player Pos X " + m_playerPosXWhenInondationComputed + " Player Pos Y " + m_playerPosYWhenInondationComputed + " Player Global Index " + m_grid.GetCellGlobalIndexFromXYIndex(m_playerPosXWhenInondationComputed, m_playerPosYWhenInondationComputed));
+                //Debug.Log("Get path to player from enemy Pos X " + xPos + " Pos Y " + yPos + " Global Index " + m_grid.GetCellGlobalIndexFromXYIndex(xPos, yPos) + " Inondation X " + currentXPosInInondation + " Inondation Y " + currentYPosInInondation + " Inondation Weight " + currentInondationWeight + " Player Pos X " + m_playerPosXWhenInondationComputed + " Player Pos Y " + m_playerPosYWhenInondationComputed + " Player Global Index " + m_grid.GetCellGlobalIndexFromXYIndex(m_playerPosXWhenInondationComputed, m_playerPosYWhenInondationComputed));
 
                 if (currentInondationWeight > 0 && currentInondationWeight <= maxWeight)
                 {
