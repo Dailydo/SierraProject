@@ -8,6 +8,10 @@ public class HUDComponent : MonoBehaviour
     private TextPanelComponent m_textPanel = null;
 
     [SerializeField]
+    private PlaneFilterComponent m_planeFilter = null;
+
+
+    [SerializeField]
     private GameObject[] m_diceGO = new GameObject[(int)EPlane.Count];
 
     [SerializeField]
@@ -84,6 +88,11 @@ public class HUDComponent : MonoBehaviour
         m_currentDie = (int)plane;
         if (plane != EPlane.Count)
             m_diceGO[m_currentDie].SetActive(true);
+
+        if (m_planeFilter != null)
+        {
+            m_planeFilter.SetPlaneFilter((int)plane);
+        }
     }
 
     private bool IsCurrentDieValid()
