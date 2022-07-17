@@ -11,17 +11,8 @@ public class EnemyComponent : CharacterComponent
     private Cell m_targetCell = null;
     private Queue<Cell> m_pendingPathfindCell = new Queue<Cell>();
 
-    private int m_xAggroRadius = 4;
-    private int m_yAggroRadius = 4;
-
     private int m_lastTargetPosX = 0;
     private int m_lastTargetPosY = 0;
-
-    class InondationMapCell
-    {
-        public int m_x = 0;
-        public int m_y = 0;
-    }
 
     public Cell TargetCell
     {
@@ -44,14 +35,6 @@ public class EnemyComponent : CharacterComponent
     public override bool CanMoveInternal()
     {
         return m_targetCell != null;
-    }
-
-    protected override void OnMoveInternal()
-    {
-        base.OnMoveInternal();
-
-        // TODO remove target cell from pathfinding
-        m_targetCell = null;
     }
 
     protected override void UpdateInternal()
@@ -103,9 +86,9 @@ public class EnemyComponent : CharacterComponent
 
     private void TryComputePathToTargetCell(int targetPosX, int targetPosY)
     {
+        /*
         if (Mathf.Abs(m_target.PosX - PosX) <= m_xAggroRadius || Mathf.Abs(m_target.PosY - PosY) <= m_yAggroRadius)
         {
-            /*
             m_pendingPathfindCell.Clear();
 
             int xSize = m_xAggroRadius * 2 + 1;
@@ -134,8 +117,8 @@ public class EnemyComponent : CharacterComponent
                 pendingInondationCell.Queue(inondationMapCell);
 
             }
-            */
         }
+        */
     }
 
 }
