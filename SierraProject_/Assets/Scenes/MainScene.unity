@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1710,7 +1710,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1461329680219752201, guid: 76c9c22d0a234ed4fa995c890b65fd63, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1461329680219752204, guid: 76c9c22d0a234ed4fa995c890b65fd63, type: 3}
       propertyPath: m_Size.x
@@ -31655,6 +31655,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1972028284803118952, guid: 662277c63edcbe54ea01e3db3f0d3600, type: 3}
   m_PrefabInstance: {fileID: 1501869246}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &851181865 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1999486425491151967, guid: 662277c63edcbe54ea01e3db3f0d3600, type: 3}
+  m_PrefabInstance: {fileID: 1501869246}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff1ad7c4a6907e4fa88a5bc292660be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &875990312
 GameObject:
   m_ObjectHideFlags: 0
@@ -32083,6 +32094,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FleshBowl
       objectReference: {fileID: 0}
+    - target: {fileID: 8364991104600985200, guid: 218c623d8980ee148bceda1642fe1bae, type: 3}
+      propertyPath: m_linkedDoor
+      value: 
+      objectReference: {fileID: 2144156284}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 218c623d8980ee148bceda1642fe1bae, type: 3}
 --- !u!4 &898848038 stripped
@@ -32392,6 +32407,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OfferingBowl
       objectReference: {fileID: 0}
+    - target: {fileID: 8364991104600985200, guid: 218c623d8980ee148bceda1642fe1bae, type: 3}
+      propertyPath: m_linkedDoor
+      value: 
+      objectReference: {fileID: 1936161302}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 218c623d8980ee148bceda1642fe1bae, type: 3}
 --- !u!1 &1100032940
@@ -33108,6 +33127,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OfferingBowl
       objectReference: {fileID: 0}
+    - target: {fileID: 8364991104600985200, guid: 218c623d8980ee148bceda1642fe1bae, type: 3}
+      propertyPath: m_linkedDoor
+      value: 
+      objectReference: {fileID: 851181865}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 218c623d8980ee148bceda1642fe1bae, type: 3}
 --- !u!1001 &1501869246
@@ -33624,6 +33647,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FleshBowl (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8364991104600985200, guid: 218c623d8980ee148bceda1642fe1bae, type: 3}
+      propertyPath: m_linkedDoor
+      value: 
+      objectReference: {fileID: 1868728056}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 218c623d8980ee148bceda1642fe1bae, type: 3}
 --- !u!4 &1780165369 stripped
@@ -33749,6 +33776,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1972028284803118952, guid: 662277c63edcbe54ea01e3db3f0d3600, type: 3}
   m_PrefabInstance: {fileID: 1868728053}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1868728056 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1999486425491151967, guid: 662277c63edcbe54ea01e3db3f0d3600, type: 3}
+  m_PrefabInstance: {fileID: 1868728053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff1ad7c4a6907e4fa88a5bc292660be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1878712135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34027,6 +34065,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1972028284803118952, guid: 662277c63edcbe54ea01e3db3f0d3600, type: 3}
   m_PrefabInstance: {fileID: 879513916}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1936161302 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1999486425491151967, guid: 662277c63edcbe54ea01e3db3f0d3600, type: 3}
+  m_PrefabInstance: {fileID: 879513916}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff1ad7c4a6907e4fa88a5bc292660be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1937771312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35400,8 +35449,8 @@ MonoBehaviour:
   - m_effect: 4
   - m_effect: 4
   - m_effect: 4
-  - m_effect: 4
-  - m_effect: 4
+  - m_effect: 0
+  - m_effect: 0
   - m_effect: 0
   - m_effect: 4
   - m_effect: 4
@@ -36826,9 +36875,9 @@ MonoBehaviour:
   - m_effect: 4
   - m_effect: 0
   - m_effect: 4
-  - m_effect: 0
-  - m_effect: 0
-  - m_effect: 0
+  - m_effect: 4
+  - m_effect: 4
+  - m_effect: 4
   - m_effect: 0
   - m_effect: 0
   - m_effect: 0
@@ -37914,7 +37963,7 @@ MonoBehaviour:
   m_cellDebugTextPrefab: {fileID: 1382448948823928842, guid: 68969afc95e87b444a55798779d576b3, type: 3}
   m_canvasGO: {fileID: 122072454}
   m_instantiateDebugText: 0
-  m_renderGridDebug: 1
+  m_renderGridDebug: 0
 --- !u!1001 &2115914517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38051,6 +38100,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1972028284803118952, guid: 662277c63edcbe54ea01e3db3f0d3600, type: 3}
   m_PrefabInstance: {fileID: 2144156281}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2144156284 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1999486425491151967, guid: 662277c63edcbe54ea01e3db3f0d3600, type: 3}
+  m_PrefabInstance: {fileID: 2144156281}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff1ad7c4a6907e4fa88a5bc292660be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &843935658181816896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38474,6 +38534,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1972028284803118952, guid: 662277c63edcbe54ea01e3db3f0d3600, type: 3}
   m_PrefabInstance: {fileID: 2909385243932854668}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2909385243932854671 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1999486425491151967, guid: 662277c63edcbe54ea01e3db3f0d3600, type: 3}
+  m_PrefabInstance: {fileID: 2909385243932854668}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff1ad7c4a6907e4fa88a5bc292660be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3153054086172988743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38653,6 +38724,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FleshBowl
       objectReference: {fileID: 0}
+    - target: {fileID: 8364991104600985200, guid: 218c623d8980ee148bceda1642fe1bae, type: 3}
+      propertyPath: m_linkedDoor
+      value: 
+      objectReference: {fileID: 2909385243932854671}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 218c623d8980ee148bceda1642fe1bae, type: 3}
 --- !u!4 &3238854726219692062 stripped
