@@ -86,6 +86,7 @@ public class WorldComponent : MonoBehaviour
                 if (spawnPoint != null)
                 {
                     SetCharacterPos(m_playerInstance, spawnPoint, true);
+                    m_playerInstance.Init(m_grid);
                 }
                 else
                 {
