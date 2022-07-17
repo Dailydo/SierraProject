@@ -50,7 +50,7 @@ public class PlayerComponent : CharacterComponent
         if (m_hp < 0)
             m_hp = 0;
 
-        UpdateSpriteAlpha();
+        UpdateSpriteColor();
     }
 
     public void Heal()
@@ -59,13 +59,14 @@ public class PlayerComponent : CharacterComponent
         if (m_hp > HP_MAX)
             m_hp = HP_MAX;
 
-        UpdateSpriteAlpha();
+        UpdateSpriteColor();
     }
 
-    private void UpdateSpriteAlpha()
+    private void UpdateSpriteColor()
     {
         Color col = CharacterSprite.color;
-        col.a = m_hp == HP_MAX ? 1.0f : 0.5f;
+        col.g = m_hp == HP_MAX ? 1.0f : 0.5f;
+        col.b = m_hp == HP_MAX ? 1.0f : 0.5f;
         CharacterSprite.color = col;
     }
 
