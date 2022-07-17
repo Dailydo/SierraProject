@@ -178,7 +178,7 @@ public class WorldComponent : MonoBehaviour
 
     void UpdateInputs()
     {
-        if (Input.GetKey(KeyCode.Q) || Input.GetAxis("Horizontal") < -0.5f)
+        if (Input.GetKey(KeyCode.A) || Input.GetAxis("Horizontal") < -0.5f)
         {
             MovePlayer(-1, 0);
         }
@@ -188,7 +188,7 @@ public class WorldComponent : MonoBehaviour
             MovePlayer(1, 0);
         }
 
-        if (Input.GetKey(KeyCode.Z) || Input.GetAxis("Vertical") > 0.5f)
+        if (Input.GetKey(KeyCode.W) || Input.GetAxis("Vertical") > 0.5f)
         {
             MovePlayer(0, 1);
         }
