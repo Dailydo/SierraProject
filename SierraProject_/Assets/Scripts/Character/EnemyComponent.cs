@@ -48,7 +48,7 @@ public class EnemyComponent : CharacterComponent
     {
         base.UpdateInternal();
         ComputeTargetCell();
-        //DebugDrawToTargetCell();
+        DebugDrawToTargetCell();
     }
 
     private void ComputeTargetCell()

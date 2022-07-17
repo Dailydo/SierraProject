@@ -5,10 +5,7 @@ using UnityEngine;
 public class HUDComponent : MonoBehaviour
 {
     [SerializeField]
-    private GameObject m_victoryTextGO = null;
-
-    [SerializeField]
-    private GameObject m_defeatTextGO = null;
+    private TextPanelComponent m_textPanel = null;
 
     [SerializeField]
     private GameObject[] m_diceGO = new GameObject[(int)EPlane.Count];
@@ -19,8 +16,6 @@ public class HUDComponent : MonoBehaviour
     void Awake()
     {
         InitDice();
-        InitVictoryText();
-        InitDefeatText();
     }
 
     void InitDice()
@@ -38,27 +33,29 @@ public class HUDComponent : MonoBehaviour
         }
     }
 
-    void InitVictoryText()
+    public void RequestDisplayText(string text)
     {
-        if (m_victoryTextGO != null)
+        if (m_textPanel != null)
         {
-            m_victoryTextGO.SetActive(false);
-        }
-        else
-        {
-            Debug.LogError("No victory text GO filled");
+            m_textPanel.RequestText(text);
         }
     }
 
-    void InitDefeatText()
+    public bool IsDisplayingText()
     {
-        if (m_defeatTextGO != null)
+        if (m_textPanel != null)
         {
-            m_defeatTextGO.SetActive(false);
+            return m_textPanel.IsDisplayingText();
         }
-        else
+
+        return false;
+    }
+
+    public void ResetText()
+    {
+        if (m_textPanel != null)
         {
-            Debug.LogError("No defeat text GO filled");
+            m_textPanel.ResetText();
         }
     }
 
@@ -70,15 +67,5 @@ public class HUDComponent : MonoBehaviour
         m_currentDie = (int)plane;
         if (plane != EPlane.Count)
             m_diceGO[m_currentDie].SetActive(true);
-    }
-
-    public void SetVictoryTextActive(bool active)
-    {
-        m_victoryTextGO.SetActive(active);
-    }
-
-    public void SetDefeatTextActive(bool active)
-    {
-        m_defeatTextGO.SetActive(active);
     }
 }

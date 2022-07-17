@@ -32,6 +32,12 @@ public class WorldComponent : MonoBehaviour
     private float m_swapPlaneDelay = 5.0f;
 
     [SerializeField]
+    private string m_victoryText;
+
+    [SerializeField]
+    private string m_defeatText;  
+
+    [SerializeField]
     private EPlane m_overridenPlane = EPlane.Count;
 
     private PlayerComponent m_playerInstance = null;
@@ -143,6 +149,8 @@ public class WorldComponent : MonoBehaviour
             Application.Quit();
         }
 
+        UpdateUIInputs();
+
         if (m_playerInstance.IsDead || m_victory)
             return;
 
@@ -176,6 +184,14 @@ public class WorldComponent : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
             TryInteract();
+        }
+    }
+
+    void UpdateUIInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button2))
+        {
+            m_HUD.ResetText();    
         }
     }
 
@@ -267,7 +283,7 @@ public class WorldComponent : MonoBehaviour
             // check victory condition
             if (cell.Effect == ECellEffect.Victory)
             {
-                m_HUD.SetVictoryTextActive(true);
+                m_HUD.RequestDisplayText(m_victoryText);
                 m_victory = true;
             }
         }
@@ -285,7 +301,7 @@ public class WorldComponent : MonoBehaviour
 
         if (m_playerInstance.IsDead)
         {
-            m_HUD.SetDefeatTextActive(true);
+            m_HUD.RequestDisplayText(m_defeatText);
             m_playerInstance.gameObject.SetActive(false);
         }
     }
