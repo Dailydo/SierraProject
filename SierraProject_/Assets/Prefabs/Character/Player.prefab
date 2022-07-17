@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveDelayInSeconds: 0.22
+  m_woundedTimeToMoveFactor: 1.5
 --- !u!95 &3402561145194394545
 Animator:
   serializedVersion: 4

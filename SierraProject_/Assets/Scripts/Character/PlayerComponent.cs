@@ -9,6 +9,9 @@ public class PlayerComponent : CharacterComponent
         public int m_y = 0;
     }
 
+    [SerializeField]
+    private float m_woundedTimeToMoveFactor = 2.0f;
+
     private const int HP_MAX = 2;
     private int m_hp = HP_MAX;
 
@@ -58,6 +61,11 @@ public class PlayerComponent : CharacterComponent
             m_hp = HP_MAX;
 
         UpdateSpriteColor();
+    }
+
+    protected override float GetMoveDelayInSeconds()
+    {
+        return base.GetMoveDelayInSeconds() * (m_hp > 0 && m_hp < HP_MAX ? m_woundedTimeToMoveFactor : 1.0f);
     }
 
     private void UpdateSpriteColor()
