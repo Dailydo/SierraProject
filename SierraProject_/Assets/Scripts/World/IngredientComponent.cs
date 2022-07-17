@@ -11,11 +11,15 @@ public class IngredientComponent : MonoBehaviour
     [SerializeField]
     private bool m_isInteractive = true;
 
+    [SerializeField]
+    private bool m_needsPower = false;
+
     IngredientInstanceComponent[] m_instances;
 
     private Cell m_cell = null;
     private EPlane m_currentPlane = EPlane.Base;
     private EIngredientState m_currentState = EIngredientState.Unused;
+    private bool m_isPowerOn = false;
 
     public void Init(GridComponent grid)
     {
@@ -32,6 +36,7 @@ public class IngredientComponent : MonoBehaviour
         m_instances = GetComponentsInChildren<IngredientInstanceComponent>(true);
         m_currentState = EIngredientState.Unused;
         m_currentPlane = EPlane.Base;
+        m_isPowerOn = false;
         UpdateInstancesFromContext();
 
         OnInit(grid);
@@ -66,6 +71,11 @@ public class IngredientComponent : MonoBehaviour
         m_currentPlane = plane;
         UpdateInstancesFromContext();
         OnPlaneChanged();
+    }
+
+    public void PowerOn()
+    {
+        m_isPowerOn = true;
     }
 
     protected virtual void OnPlaneChanged()
@@ -122,6 +132,9 @@ public class IngredientComponent : MonoBehaviour
 
     public bool IsInteractive()
     {
+        if (m_needsPower && !m_isPowerOn)
+            return false;
+
         IngredientInstanceComponent activeInstance = GetActiveContextInstance();
         if (activeInstance != null)
             return activeInstance.IsInteractive;

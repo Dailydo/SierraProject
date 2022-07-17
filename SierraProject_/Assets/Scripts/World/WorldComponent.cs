@@ -17,9 +17,6 @@ public class WorldComponent : MonoBehaviour
     private GameObject m_playerPrefab = null;
 
     [SerializeField]
-    private GameObject m_enemyPrefab = null;
-
-    [SerializeField]
     private Transform m_cameraTransform = null;
 
     [SerializeField]
@@ -32,7 +29,16 @@ public class WorldComponent : MonoBehaviour
     private float m_swapPlaneDelay = 5.0f;
 
     [SerializeField]
+    private TextPanelDisplayData m_victoryText;
+
+    [SerializeField]
+    private TextPanelDisplayData m_defeatText;  
+
+    [SerializeField]
     private EPlane m_overridenPlane = EPlane.Count;
+
+    [SerializeField]
+    private bool m_forceChangePlaneWhenPossible = true;
 
     private PlayerComponent m_playerInstance = null;
     private List<EnemyComponent> m_enemiesInstances = new List<EnemyComponent>();
@@ -42,7 +48,12 @@ public class WorldComponent : MonoBehaviour
     private EPlane m_currentPlane = EPlane.Base;
     private float m_swapPlaneCooldown;
 
-    private bool m_victory = false;
+    private bool m_isPowerOn = false;
+
+    public bool IsPowerOn
+    {
+        get { return m_isPowerOn; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -52,15 +63,10 @@ public class WorldComponent : MonoBehaviour
         InstantiatePlayer();
 
         m_swapPlaneCooldown = m_swapPlaneDelay;
-        m_victory = false;
+        m_isPowerOn = false;
 
         m_availablePlanes.Add(EPlane.Base);
         m_HUD.SetCurrentPlane(EPlane.Base);
-
-        // TEMP test
-        Cell defaultEnemySpawnPoint = m_grid.GetSpecificCell(ECellEffect.EnemySpawnPoint);
-        if (defaultEnemySpawnPoint != null)
-            SpawnEnemy(m_enemyPrefab, defaultEnemySpawnPoint);
     }
 
     void InitIngredients()
@@ -143,8 +149,27 @@ public class WorldComponent : MonoBehaviour
             Application.Quit();
         }
 
-        if (m_playerInstance.IsDead || m_victory)
+        UpdateUIInputs();
+
+        if (m_playerInstance.gameObject.activeSelf)
+        {
+            if (m_playerInstance.IsDead)
+            {
+                m_HUD.RequestDisplayText(m_defeatText);
+                m_playerInstance.gameObject.SetActive(false);
+            }
+
+            if (m_playerInstance.Victory)
+            {
+                m_HUD.RequestDisplayText(m_victoryText);
+                m_playerInstance.gameObject.SetActive(false);
+            }
+        }
+
+        if (m_playerInstance.IsDead || m_playerInstance.Victory)
+        {
             return;
+        }
 
         UpdateInputs();
         UpdateEnemies();
@@ -179,6 +204,14 @@ public class WorldComponent : MonoBehaviour
         }
     }
 
+    void UpdateUIInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button2))
+        {
+            m_HUD.ResetText();    
+        }
+    }
+
     void UpdateEnemies()
     {
         foreach (EnemyComponent enemy in m_enemiesInstances)
@@ -205,12 +238,35 @@ public class WorldComponent : MonoBehaviour
             m_swapPlaneCooldown -= Time.deltaTime;
             if (m_swapPlaneCooldown <= 0.0f)
             {
-                EPlane newPlane = m_overridenPlane != EPlane.Count ? m_overridenPlane : m_availablePlanes[Random.Range(0, m_availablePlanes.Count)];
+                EPlane newPlane = m_overridenPlane != EPlane.Count ? m_overridenPlane : GetRandomNewPlane();
                 SetCurrentPlane(newPlane);
 
                 m_swapPlaneCooldown = m_swapPlaneDelay;
             }
+            else
+            {
+                m_HUD.UpdateDieRemainingTime(m_swapPlaneCooldown);
+            }
         }
+    }
+
+    EPlane GetRandomNewPlane()
+    {
+        List<EPlane> possiblePlanes = new List<EPlane>();
+        if (m_forceChangePlaneWhenPossible)
+        {
+            foreach (EPlane plane in m_availablePlanes)
+            {
+                if (plane != m_currentPlane)
+                    possiblePlanes.Add(plane);
+            }
+        }
+        else
+        {
+            possiblePlanes.AddRange(m_availablePlanes);
+        }
+
+        return possiblePlanes[Random.Range(0, possiblePlanes.Count)];
     }
 
     void MovePlayer(int moveX, int moveY)
@@ -230,7 +286,7 @@ public class WorldComponent : MonoBehaviour
             return;
         }
 
-        if (!cell.Walkable)
+        if (!cell.Walkable && !m_playerInstance.CheatGhostMode)
             return;
 
         SetCharacterPos(m_playerInstance, cell, false);
@@ -267,8 +323,7 @@ public class WorldComponent : MonoBehaviour
             // check victory condition
             if (cell.Effect == ECellEffect.Victory)
             {
-                m_HUD.SetVictoryTextActive(true);
-                m_victory = true;
+                m_playerInstance.Victory = true;
             }
         }
         else
@@ -281,12 +336,6 @@ public class WorldComponent : MonoBehaviour
 
             // update cell danger
             cell.IsLethal = true;
-        }
-
-        if (m_playerInstance.IsDead)
-        {
-            m_HUD.SetDefeatTextActive(true);
-            m_playerInstance.gameObject.SetActive(false);
         }
     }
 
@@ -331,6 +380,15 @@ public class WorldComponent : MonoBehaviour
         // TODO update tilemap
 
         Debug.Log("Current plane updated to " + newPlane.ToString());
+    }
+
+    public void PowerOn()
+    {
+        m_isPowerOn = true;
+        for (int i = 0; i < m_ingredients.Length; ++i)
+        {
+            m_ingredients[i].PowerOn();
+        }
     }
 
     private void LateUpdate()

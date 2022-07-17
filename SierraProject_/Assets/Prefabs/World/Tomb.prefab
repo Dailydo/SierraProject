@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 894265160803258729}
   - component: {fileID: 792224914055400064}
+  - component: {fileID: 5193833681702843911}
   m_Layer: 0
   m_Name: Tomb
   m_TagString: Untagged
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5193833681702843911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3335774817807308596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87b4f3262ce5d14b9a1b3353c7e3c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_isInteractive: 1
