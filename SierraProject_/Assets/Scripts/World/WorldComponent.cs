@@ -32,6 +32,12 @@ public class WorldComponent : MonoBehaviour
     private float m_swapPlaneDelay = 5.0f;
 
     [SerializeField]
+    private TextPanelDisplayData m_victoryText;
+
+    [SerializeField]
+    private TextPanelDisplayData m_defeatText;  
+
+    [SerializeField]
     private EPlane m_overridenPlane = EPlane.Count;
 
     [SerializeField]
@@ -45,6 +51,14 @@ public class WorldComponent : MonoBehaviour
     private EPlane m_currentPlane = EPlane.Base;
     private float m_swapPlaneCooldown;
 
+    private bool m_isPowerOn = false;
+
+    public bool IsPowerOn
+    {
+        get { return m_isPowerOn; }
+        set { m_isPowerOn = value; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,14 +67,10 @@ public class WorldComponent : MonoBehaviour
         InstantiatePlayer();
 
         m_swapPlaneCooldown = m_swapPlaneDelay;
+        m_isPowerOn = false;
 
         m_availablePlanes.Add(EPlane.Base);
         m_HUD.SetCurrentPlane(EPlane.Base);
-
-        // TEMP test
-        Cell defaultEnemySpawnPoint = m_grid.GetSpecificCell(ECellEffect.EnemySpawnPoint);
-        if (defaultEnemySpawnPoint != null)
-            SpawnEnemy(m_enemyPrefab, defaultEnemySpawnPoint);
     }
 
     void InitIngredients()
@@ -143,17 +153,19 @@ public class WorldComponent : MonoBehaviour
             Application.Quit();
         }
 
+        UpdateUIInputs();
+
         if (m_playerInstance.gameObject.activeSelf)
         {
             if (m_playerInstance.IsDead)
             {
-                m_HUD.SetDefeatTextActive(true);
+                m_HUD.RequestDisplayText(m_defeatText);
                 m_playerInstance.gameObject.SetActive(false);
             }
 
             if (m_playerInstance.Victory)
             {
-                m_HUD.SetVictoryTextActive(true);
+                m_HUD.RequestDisplayText(m_victoryText);
                 m_playerInstance.gameObject.SetActive(false);
             }
         }
@@ -193,6 +205,14 @@ public class WorldComponent : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
             TryInteract();
+        }
+    }
+
+    void UpdateUIInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button2))
+        {
+            m_HUD.ResetText();    
         }
     }
 
