@@ -33624,6 +33624,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FleshBowl (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8364991104600985200, guid: 218c623d8980ee148bceda1642fe1bae, type: 3}
+      propertyPath: m_linkedDoor
+      value: 
+      objectReference: {fileID: 1868728056}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 218c623d8980ee148bceda1642fe1bae, type: 3}
 --- !u!4 &1780165369 stripped
@@ -33749,6 +33753,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1972028284803118952, guid: 662277c63edcbe54ea01e3db3f0d3600, type: 3}
   m_PrefabInstance: {fileID: 1868728053}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1868728056 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1999486425491151967, guid: 662277c63edcbe54ea01e3db3f0d3600, type: 3}
+  m_PrefabInstance: {fileID: 1868728053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff1ad7c4a6907e4fa88a5bc292660be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1878712135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38474,6 +38489,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1972028284803118952, guid: 662277c63edcbe54ea01e3db3f0d3600, type: 3}
   m_PrefabInstance: {fileID: 2909385243932854668}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2909385243932854671 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1999486425491151967, guid: 662277c63edcbe54ea01e3db3f0d3600, type: 3}
+  m_PrefabInstance: {fileID: 2909385243932854668}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff1ad7c4a6907e4fa88a5bc292660be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3153054086172988743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38653,6 +38679,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FleshBowl
       objectReference: {fileID: 0}
+    - target: {fileID: 8364991104600985200, guid: 218c623d8980ee148bceda1642fe1bae, type: 3}
+      propertyPath: m_linkedDoor
+      value: 
+      objectReference: {fileID: 2909385243932854671}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 218c623d8980ee148bceda1642fe1bae, type: 3}
 --- !u!4 &3238854726219692062 stripped
