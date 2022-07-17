@@ -209,6 +209,10 @@ MonoBehaviour:
     m_paintType: 1
   - m_cellIndex: 2931
     m_paintType: 1
+  - m_cellIndex: 2869
+    m_paintType: 1
+  - m_cellIndex: 2807
+    m_paintType: 1
   m_horizontalRequestList:
   - m_startCellIndex: 1188
     m_endCellIndex: 1192
@@ -394,7 +398,7 @@ MonoBehaviour:
     m_endCellIndex: 2874
     m_paintType: 1
   - m_startCellIndex: 2801
-    m_endCellIndex: 2807
+    m_endCellIndex: 2805
     m_paintType: 1
   - m_startCellIndex: 2992
     m_endCellIndex: 3002
