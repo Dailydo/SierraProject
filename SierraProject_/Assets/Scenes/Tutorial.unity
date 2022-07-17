@@ -758,7 +758,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -39.1, y: -328.5}
+  m_AnchoredPosition: {x: -39.1, y: -222}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1619342143
@@ -1280,22 +1280,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'The character is stuck in a mansion, and is trying to reach a tomb.
+  m_text: 'A character is tasked with locating a tomb in a mansion. Various planes
+    overlap there, each with their rules and inhabitants. Trust in your dice to carry
+    you through the place and overcome its various challenges.
 
+    
 
+    Good
+    luck.
 
-    His
-    path is blocked, but hidden dice will allow him to access parallel planes, full
-    of puzzles and traps.
-
-
-
-    He should be able to reach the tomb by navigating
-    through the different planes.
-
-
-
-    Good luck.'
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 268d2726e35c85b4a91921f1916318be, type: 2}
   m_sharedMaterial: {fileID: -8966940434852046470, guid: 268d2726e35c85b4a91921f1916318be, type: 2}
