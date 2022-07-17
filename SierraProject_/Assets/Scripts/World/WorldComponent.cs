@@ -143,8 +143,16 @@ public class WorldComponent : MonoBehaviour
             Application.Quit();
         }
 
+        if (m_playerInstance.IsDead && m_playerInstance.gameObject.activeSelf)
+        {
+            m_HUD.SetDefeatTextActive(true);
+            m_playerInstance.gameObject.SetActive(false);
+        }
+
         if (m_playerInstance.IsDead || m_victory)
+        {
             return;
+        }
 
         UpdateInputs();
         UpdateEnemies();
@@ -285,12 +293,6 @@ public class WorldComponent : MonoBehaviour
 
             // update cell danger
             cell.IsLethal = true;
-        }
-
-        if (m_playerInstance.IsDead)
-        {
-            m_HUD.SetDefeatTextActive(true);
-            m_playerInstance.gameObject.SetActive(false);
         }
     }
 
