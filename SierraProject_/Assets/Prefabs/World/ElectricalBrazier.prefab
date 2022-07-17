@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3090033727080178204}
   - component: {fileID: 1265623396813461683}
   m_Layer: 0
-  m_Name: BlueBrazier
+  m_Name: ElectricalBrazier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
