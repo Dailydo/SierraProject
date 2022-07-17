@@ -137,6 +137,11 @@ public class WorldComponent : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
         if (m_playerInstance.IsDead || m_victory)
             return;
 
@@ -170,11 +175,6 @@ public class WorldComponent : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
             TryInteract();
-        }
-
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            Application.Quit();
         }
     }
 
