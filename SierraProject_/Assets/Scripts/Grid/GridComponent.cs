@@ -159,6 +159,36 @@ public class GridComponent : MonoBehaviour
         return neighbours;
     }
 
+    public IngredientComponent GetCloseIngredient(int x, int y)
+    {
+        IngredientComponent ingredient = GetIngredientAt(x + 1, y);
+        if (ingredient != null)
+            return ingredient;
+
+        ingredient = GetIngredientAt(x - 1, y);
+        if (ingredient != null)
+            return ingredient;
+
+        ingredient = GetIngredientAt(x, y + 1);
+        if (ingredient != null)
+            return ingredient;
+
+        ingredient = GetIngredientAt(x, y - 1);
+        if (ingredient != null)
+            return ingredient;
+
+        return null;
+    }
+
+    public IngredientComponent GetIngredientAt(int x, int y)
+    {
+        Cell cell = GetCell(x, y);
+        if (cell == null)
+            return null;
+
+        return cell.InnerIngredient;
+    }
+
     public Vector3 GetWorldPosition(int x, int y)
     {
         if (!IsValidPosition(x, y))

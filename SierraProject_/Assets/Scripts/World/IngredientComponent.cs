@@ -2,12 +2,15 @@ using UnityEngine;
 
 public enum EIngredientState
 {
-    Used,
-    Unused
+    Unused,
+    Used
 }
 
 public class IngredientComponent : MonoBehaviour
 {
+    [SerializeField]
+    private bool m_isInteractive = true;
+
     IngredientInstanceComponent[] m_instances;
 
     private Cell m_cell = null;
@@ -42,9 +45,9 @@ public class IngredientComponent : MonoBehaviour
         get { return m_currentState; }
     }
 
-    public void SetCurrentState(EIngredientState state)
+    public void SetUsed()
     {
-        m_currentState = state;
+        m_currentState = EIngredientState.Used;
         UpdateInstancesFromContext();
     }
 
@@ -65,19 +68,45 @@ public class IngredientComponent : MonoBehaviour
         }
     }
 
-    public bool IsActiveInCurrentContext()
+    public IngredientInstanceComponent GetActiveContextInstance()
     {
         if (m_instances != null && m_instances.Length > 0)
         {
             foreach (IngredientInstanceComponent instance in m_instances)
             {
                 if (instance.MatchesContext(m_currentState, m_currentPlane))
-                    return true;
+                    return instance;
             }
+        }
 
-            return false;
+        return null;
+    }
+
+    public bool IsActiveInCurrentContext()
+    {
+        if (m_instances != null && m_instances.Length > 0)
+        {
+            return GetActiveContextInstance() != null;
         }
 
         return true;
+    }
+
+    public virtual void OnInteracted()
+    {
+        if (IsInteractive())
+        {
+            SetUsed();
+            Debug.Log("Player has interacted with " + name);
+        }
+    }
+
+    public bool IsInteractive()
+    {
+        IngredientInstanceComponent activeInstance = GetActiveContextInstance();
+        if (activeInstance != null)
+            return activeInstance.IsInteractive;
+
+        return m_isInteractive;
     }
 }

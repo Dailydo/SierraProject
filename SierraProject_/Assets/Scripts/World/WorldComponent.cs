@@ -191,6 +191,11 @@ public class WorldComponent : MonoBehaviour
         {
             MovePlayer(0, -1);
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TryInteract();
+        }
     }
 
     void UpdateEnemies()
@@ -303,6 +308,13 @@ public class WorldComponent : MonoBehaviour
             // remove cell danger
             cell.IsLetal = false;
         }
+    }
+
+    private void TryInteract()
+    {
+        IngredientComponent closeIngredient = m_grid.GetCloseIngredient(m_playerInstance.PosX, m_playerInstance.PosY);
+        if (closeIngredient != null)
+            closeIngredient.OnInteracted();
     }
 
     private void SetCurrentPlane(EPlane newPlane)
