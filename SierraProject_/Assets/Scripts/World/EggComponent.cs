@@ -13,11 +13,15 @@ public class EggComponent : ObstacleComponent
     {
         base.OnInit(grid);
 
-        List<Cell> walkableCells = grid.GetWalkableNeighbours(GetCell().PosX, GetCell().PosY);
-        if (walkableCells.Count > 0)
-            m_targetCellForEnemy = walkableCells[0];
-        else
-            Debug.LogWarning("An egg did not find any place to spawn enemy");
+        Cell cell = GetCell();
+        if (cell != null)
+        {
+            List<Cell> walkableCells = grid.GetWalkableNeighbours(cell.PosX, cell.PosY);
+            if (walkableCells.Count > 0)
+                m_targetCellForEnemy = walkableCells[0];
+            else
+                Debug.LogWarning("An egg did not find any place to spawn enemy");
+        }
     }
 
     protected override void OnInteractedInternal(PlayerComponent player)
