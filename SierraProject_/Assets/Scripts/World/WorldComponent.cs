@@ -210,6 +210,10 @@ public class WorldComponent : MonoBehaviour
 
                 m_swapPlaneCooldown = m_swapPlaneDelay;
             }
+            else
+            {
+                m_HUD.UpdateDieRemainingTime(m_swapPlaneCooldown);
+            }
         }
     }
 
