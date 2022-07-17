@@ -56,7 +56,9 @@ public class WorldComponent : MonoBehaviour
         m_HUD.SetCurrentPlane(EPlane.Base);
 
         // TEMP test
-        InstantiateEnemy();
+        Cell defaultEnemySpawnPoint = m_grid.GetSpecificCell(ECellEffect.EnemySpawnPoint);
+        if (defaultEnemySpawnPoint != null)
+            SpawnEnemy(m_enemyPrefab, defaultEnemySpawnPoint);
     }
 
     void InitIngredients()
@@ -99,37 +101,35 @@ public class WorldComponent : MonoBehaviour
         }
     }
 
-    void InstantiateEnemy()
+    public void SpawnEnemy(GameObject enemyPrefab, Cell spawnPoint)
     {
-        GameObject enemyGO = Instantiate(m_enemyPrefab);
-        if (enemyGO != null)
+        if (spawnPoint != null)
         {
-            EnemyComponent enemyInstance = enemyGO.GetComponent<EnemyComponent>();
-            if (enemyInstance != null)
+            GameObject enemyGO = Instantiate(enemyPrefab);
+            if (enemyGO != null)
             {
-                enemyInstance.transform.parent = transform; // later, will be the proper grid
-
-                Cell spawnPoint = m_grid.GetSpecificCell(ECellEffect.EnemySpawnPoint);
-                if (spawnPoint != null)
+                EnemyComponent enemyInstance = enemyGO.GetComponent<EnemyComponent>();
+                if (enemyInstance != null)
                 {
+                    enemyInstance.transform.parent = transform; // later, will be the proper grid
+
                     SetCharacterPos(enemyInstance, spawnPoint, true);
                     enemyInstance.Init(m_grid, m_playerInstance);
                     m_enemiesInstances.Add(enemyInstance);
                 }
                 else
                 {
-                    Destroy(enemyGO);
-                    Debug.LogError("Cannot find enemy spawn point");
+                    Debug.LogError("No EnemyComponent on enemy");
                 }
             }
             else
             {
-                Debug.LogError("No EnemyComponent on enemy");
+                Debug.LogError("Cannot instantiate enemy prefab");
             }
         }
         else
         {
-            Debug.LogError("Cannot instantiate enemy prefab");
+            Debug.LogError("Need a valid spawn point to spawn enemy");
         }
     }
 
@@ -287,7 +287,7 @@ public class WorldComponent : MonoBehaviour
     {
         IngredientComponent closeIngredient = m_grid.GetCloseIngredient(m_playerInstance.PosX, m_playerInstance.PosY);
         if (closeIngredient != null)
-            closeIngredient.OnInteracted();
+            closeIngredient.OnInteracted(m_playerInstance);
     }
 
     private void SetCurrentPlane(EPlane newPlane)
