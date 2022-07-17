@@ -86,6 +86,18 @@ public class GridComponent : MonoBehaviour
                             Debug.DrawLine(GetCellPosition(x, y + 1), GetCellPosition(x + 1, y), Color.red, Time.deltaTime);
                             Debug.DrawLine(GetCellPosition(x, y), GetCellPosition(x + 1, y + 1), Color.red, Time.deltaTime);
                         }
+
+                        if (cell != null && cell.EnemySpawnPoint)
+                        {
+                            Debug.DrawLine(GetCellPosition(x, y + 1), GetCellPosition(x + 1, y), Color.black, Time.deltaTime);
+                            Debug.DrawLine(GetCellPosition(x, y), GetCellPosition(x + 1, y + 1), Color.black, Time.deltaTime);
+                        }
+
+                        if (cell != null && cell.PlayerSpawnPoint)
+                        {
+                            Debug.DrawLine(GetCellPosition(x, y + 1), GetCellPosition(x + 1, y), Color.blue, Time.deltaTime);
+                            Debug.DrawLine(GetCellPosition(x, y), GetCellPosition(x + 1, y + 1), Color.blue, Time.deltaTime);
+                        }
                     }
 
                     if (m_instantiateDebugText)

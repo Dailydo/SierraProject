@@ -9,7 +9,9 @@ public class GridPainterComponent : MonoBehaviour
     public enum EPaintType 
     {
         Empty,
-        Obstacle
+        Obstacle,
+        EnemySpawnPoint,
+        PlayerSpawnPoint
     }
 
     [Serializable]
@@ -222,6 +224,14 @@ public class GridPainterComponent : MonoBehaviour
 
                 case EPaintType.Obstacle:
                 cell.Effect = ECellEffect.Obstacle;
+                break;
+
+                case EPaintType.EnemySpawnPoint:
+                cell.Effect = ECellEffect.EnemySpawnPoint;
+                break;
+
+                case EPaintType.PlayerSpawnPoint:
+                cell.Effect = ECellEffect.PlayerSpawnPoint;
                 break;
             }
         }

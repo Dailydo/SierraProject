@@ -27,6 +27,16 @@ public class Cell
         get { return Effect != ECellEffect.Obstacle; }
     }
 
+    public bool EnemySpawnPoint
+    {
+        get { return Effect == ECellEffect.EnemySpawnPoint; }
+    }
+
+    public bool PlayerSpawnPoint
+    {
+        get { return Effect == ECellEffect.PlayerSpawnPoint; }
+    }
+
     public ECellEffect Effect
     {
         get
