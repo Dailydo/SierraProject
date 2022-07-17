@@ -200,7 +200,7 @@ public class WorldComponent : MonoBehaviour
 
     void UpdateCurrentPlane()
     {
-        if (m_swapPlaneCooldown > 0.0f && m_availablePlanes.Count > 1)
+        if (m_swapPlaneCooldown > 0.0f && (m_availablePlanes.Count > 1 || m_overridenPlane != EPlane.Count))
         {
             m_swapPlaneCooldown -= Time.deltaTime;
             if (m_swapPlaneCooldown <= 0.0f)
