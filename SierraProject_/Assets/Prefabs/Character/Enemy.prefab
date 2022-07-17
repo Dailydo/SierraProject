@@ -150,5 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4aac1e009ec34c47a2116f3d5bb42d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_moveDelayInSeconds: 0.45
+  m_moveDelayInSeconds: 0.32
   m_lethalPlane: 1
+  m_aggroDistanceInTile: 8

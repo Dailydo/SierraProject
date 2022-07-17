@@ -31150,8 +31150,9 @@ MonoBehaviour:
   m_cameraTransform: {fileID: 330333236}
   m_grid: {fileID: 2091455911}
   m_HUD: {fileID: 116491137}
-  m_swapPlaneDelay: 5
+  m_swapPlaneDelay: 7
   m_overridenPlane: 4
+  m_forceChangePlaneWhenPossible: 1
 --- !u!1001 &549318252
 PrefabInstance:
   m_ObjectHideFlags: 0

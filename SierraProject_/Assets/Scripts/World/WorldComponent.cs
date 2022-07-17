@@ -34,6 +34,9 @@ public class WorldComponent : MonoBehaviour
     [SerializeField]
     private EPlane m_overridenPlane = EPlane.Count;
 
+    [SerializeField]
+    private bool m_forceChangePlaneWhenPossible = true;
+
     private PlayerComponent m_playerInstance = null;
     private List<EnemyComponent> m_enemiesInstances = new List<EnemyComponent>();
     private IngredientComponent[] m_ingredients;
@@ -213,7 +216,7 @@ public class WorldComponent : MonoBehaviour
             m_swapPlaneCooldown -= Time.deltaTime;
             if (m_swapPlaneCooldown <= 0.0f)
             {
-                EPlane newPlane = m_overridenPlane != EPlane.Count ? m_overridenPlane : m_availablePlanes[Random.Range(0, m_availablePlanes.Count)];
+                EPlane newPlane = m_overridenPlane != EPlane.Count ? m_overridenPlane : GetRandomNewPlane();
                 SetCurrentPlane(newPlane);
 
                 m_swapPlaneCooldown = m_swapPlaneDelay;
@@ -223,6 +226,25 @@ public class WorldComponent : MonoBehaviour
                 m_HUD.UpdateDieRemainingTime(m_swapPlaneCooldown);
             }
         }
+    }
+
+    EPlane GetRandomNewPlane()
+    {
+        List<EPlane> possiblePlanes = new List<EPlane>();
+        if (m_forceChangePlaneWhenPossible)
+        {
+            foreach (EPlane plane in m_availablePlanes)
+            {
+                if (plane != m_currentPlane)
+                    possiblePlanes.Add(plane);
+            }
+        }
+        else
+        {
+            possiblePlanes.AddRange(m_availablePlanes);
+        }
+
+        return possiblePlanes[Random.Range(0, possiblePlanes.Count)];
     }
 
     void MovePlayer(int moveX, int moveY)
