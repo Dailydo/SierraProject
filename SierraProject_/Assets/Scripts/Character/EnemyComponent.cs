@@ -10,6 +10,7 @@ public class EnemyComponent : CharacterComponent
     private PlayerComponent m_target = null;
     private Cell m_targetCell = null;
     private Queue<Cell> m_pendingPathfindCell = new Queue<Cell>();
+    public int m_aggroDistanceInTile = 8;
 
     private int m_lastTargetPosX = 0;
     private int m_lastTargetPosY = 0;
@@ -114,7 +115,7 @@ public class EnemyComponent : CharacterComponent
     {
         if (m_target != null)
         {
-            m_target.GetPathToPlayer(PosX, PosY, m_pendingPathfindCell, 8);
+            m_target.GetPathToPlayer(PosX, PosY, m_pendingPathfindCell, m_aggroDistanceInTile);
         }
     }
 
