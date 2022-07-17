@@ -172,27 +172,27 @@ public class WorldComponent : MonoBehaviour
 
     void UpdateInputs()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q) || Input.GetAxis("Horizontal") < -0.5f)
         {
             MovePlayer(-1, 0);
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetAxis("Horizontal") > 0.5f)
         {
             MovePlayer(1, 0);
         }
 
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKey(KeyCode.Z) || Input.GetAxis("Vertical") > 0.5f)
         {
             MovePlayer(0, 1);
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) || Input.GetAxis("Vertical") < -0.5f)
         {
             MovePlayer(0, -1);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
             TryInteract();
         }

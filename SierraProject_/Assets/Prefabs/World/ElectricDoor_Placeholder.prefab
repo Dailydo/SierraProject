@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_plane: 2
   m_state: 0
-  m_isInteractive: 1
+  m_isInteractive: 0
 --- !u!1 &1285412519346224178
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_plane: 3
   m_state: 0
-  m_isInteractive: 1
+  m_isInteractive: 0
 --- !u!1 &6238401263400326622
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,7 +499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_plane: 1
   m_state: 0
-  m_isInteractive: 1
+  m_isInteractive: 0
 --- !u!1 &6450227113919166645
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_plane: 0
   m_state: 0
-  m_isInteractive: 1
+  m_isInteractive: 0
 --- !u!1 &7120815459914206359
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,7 +752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff1ad7c4a6907e4fa88a5bc292660be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_isInteractive: 1
+  m_isInteractive: 0
 --- !u!1 &8799237653268719436
 GameObject:
   m_ObjectHideFlags: 0
