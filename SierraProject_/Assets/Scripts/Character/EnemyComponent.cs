@@ -37,6 +37,12 @@ public class EnemyComponent : CharacterComponent
         return m_targetCell != null;
     }
 
+    protected override void OnMoveInternal()
+    {
+        base.OnMoveInternal();
+        m_targetCell = null;
+    }
+
     protected override void UpdateInternal()
     {
         base.UpdateInternal();
@@ -54,12 +60,10 @@ public class EnemyComponent : CharacterComponent
                 m_lastTargetPosX = m_target.PosX;
                 m_lastTargetPosY = m_target.PosY;
             }
-            else
+
+            if (m_pendingPathfindCell.Count > 0)
             {
-                if (m_pendingPathfindCell.Count > 0)
-                {
-                    m_targetCell = m_pendingPathfindCell.Dequeue();
-                }
+                m_targetCell = m_pendingPathfindCell.Dequeue();
             }
 
             // Idle random move
@@ -86,39 +90,10 @@ public class EnemyComponent : CharacterComponent
 
     private void TryComputePathToTargetCell(int targetPosX, int targetPosY)
     {
-        /*
-        if (Mathf.Abs(m_target.PosX - PosX) <= m_xAggroRadius || Mathf.Abs(m_target.PosY - PosY) <= m_yAggroRadius)
+        if (m_target != null)
         {
-            m_pendingPathfindCell.Clear();
-
-            int xSize = m_xAggroRadius * 2 + 1;
-            int ySize = m_yAggroRadius * 2 + 1;
-
-            int[,] inondationMap = new int[xSize, ySize];
-            for (int x = 0; x < xSize; x++)
-            {
-                for(int y = 0; y < ySize; y++)
-                {
-                    inondationMap[x, y] = -1;
-                }
-            }
-
-            int targetXPosInGrid = m_target.PosX - (PosX - m_xAggroRadius);
-            int targetYPosInGrid = m_target.PosY - (PosY - m_yAggroRadius);
-            if (targetXPosInGrid >= 0 && targetYPosInGrid >= 0)
-            {
-                inondationMap[targetXPosInGrid, targetYPosInGrid] = 0;
-
-                InondationMapCell inondationMapCell = new InondationMapCell();
-                inondationMapCell.m_x = targetXPosInGrid;
-                inondationMapCell.m_y = targetYPosInGrid;
-
-                Queue<Cell> pendingInondationCell = new Queue<Cell>();
-                pendingInondationCell.Queue(inondationMapCell);
-
-            }
+            m_target.GetPathToPlayer(PosX, PosY, m_pendingPathfindCell, 8);
         }
-        */
     }
 
 }
