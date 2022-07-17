@@ -8,6 +8,6 @@ public class SkynetComponent : ObstacleComponent
     {
         base.OnInteractedInternal(player);
 
-        World.IsPowerOn = true;
+        World.PowerOn();
     }
 }

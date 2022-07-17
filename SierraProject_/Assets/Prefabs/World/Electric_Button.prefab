@@ -753,6 +753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractive: 1
+  m_needsPower: 1
 --- !u!1 &8046442519307190849
 GameObject:
   m_ObjectHideFlags: 0

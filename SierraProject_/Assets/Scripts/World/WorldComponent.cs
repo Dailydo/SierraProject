@@ -53,7 +53,6 @@ public class WorldComponent : MonoBehaviour
     public bool IsPowerOn
     {
         get { return m_isPowerOn; }
-        set { m_isPowerOn = value; }
     }
 
     // Start is called before the first frame update
@@ -381,6 +380,15 @@ public class WorldComponent : MonoBehaviour
         // TODO update tilemap
 
         Debug.Log("Current plane updated to " + newPlane.ToString());
+    }
+
+    public void PowerOn()
+    {
+        m_isPowerOn = true;
+        for (int i = 0; i < m_ingredients.Length; ++i)
+        {
+            m_ingredients[i].PowerOn();
+        }
     }
 
     private void LateUpdate()
