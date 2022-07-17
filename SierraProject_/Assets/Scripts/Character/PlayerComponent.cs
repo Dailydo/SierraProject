@@ -12,6 +12,9 @@ public class PlayerComponent : CharacterComponent
     [SerializeField]
     private float m_woundedTimeToMoveFactor = 2.0f;
 
+    [SerializeField]
+    private bool m_cheatGhostMode = false;
+
     private const int HP_MAX = 2;
     private int m_hp = HP_MAX;
 
@@ -24,6 +27,7 @@ public class PlayerComponent : CharacterComponent
     int m_playerPosYWhenInondationComputed = -1;
 
     private GridComponent m_grid = null;
+    private bool m_victory = false;
 
     public int HP
     {
@@ -35,9 +39,21 @@ public class PlayerComponent : CharacterComponent
         get { return HP <= 0; }
     }
 
+    public bool Victory
+    {
+        get { return m_victory; }
+        set { m_victory = value; }
+    }
+
+    public bool CheatGhostMode
+    {
+        get { return m_cheatGhostMode; }
+    }
+
     public void Init(GridComponent grid)
     {
         m_grid = grid;
+        m_victory = false;
     }
 
     protected override void OnStartInternal()

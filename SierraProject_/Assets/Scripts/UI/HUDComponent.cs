@@ -13,6 +13,12 @@ public class HUDComponent : MonoBehaviour
     [SerializeField]
     private GameObject[] m_diceGO = new GameObject[(int)EPlane.Count];
 
+    [SerializeField]
+    private float m_rotatingDieDuration = 1.0f;
+
+    [SerializeField]
+    private float m_rotatingDieSpeed = 5.0f;
+
     private int m_currentDie = (int)EPlane.Count;
 
     // Start is called before the first frame update
@@ -62,14 +68,30 @@ public class HUDComponent : MonoBehaviour
         }
     }
 
+    public void UpdateDieRemainingTime(float remainingTime)
+    {
+        if (remainingTime <= m_rotatingDieDuration && IsCurrentDieValid())
+        {
+            m_diceGO[m_currentDie].transform.Rotate(Vector3.forward, m_rotatingDieSpeed * Time.deltaTime);
+        }
+    }
+
     public void SetCurrentPlane(EPlane plane)
     {
-        if (m_currentDie >= 0 && m_currentDie < m_diceGO.Length && m_diceGO[m_currentDie] != null)
+        if (IsCurrentDieValid())
+        {
+            m_diceGO[m_currentDie].transform.rotation = Quaternion.identity;
             m_diceGO[m_currentDie].SetActive(false);
+        }
             
         m_currentDie = (int)plane;
         if (plane != EPlane.Count)
             m_diceGO[m_currentDie].SetActive(true);
+    }
+
+    private bool IsCurrentDieValid()
+    {
+        return m_currentDie >= 0 && m_currentDie < m_diceGO.Length && m_diceGO[m_currentDie] != null;
     }
 
     public void SetVictoryTextActive(bool active)

@@ -34,6 +34,9 @@ public class WorldComponent : MonoBehaviour
     [SerializeField]
     private EPlane m_overridenPlane = EPlane.Count;
 
+    [SerializeField]
+    private bool m_forceChangePlaneWhenPossible = true;
+
     private PlayerComponent m_playerInstance = null;
     private List<EnemyComponent> m_enemiesInstances = new List<EnemyComponent>();
     private IngredientComponent[] m_ingredients;
@@ -41,8 +44,6 @@ public class WorldComponent : MonoBehaviour
     private List<EPlane> m_availablePlanes = new List<EPlane>();
     private EPlane m_currentPlane = EPlane.Base;
     private float m_swapPlaneCooldown;
-
-    private bool m_victory = false;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +53,6 @@ public class WorldComponent : MonoBehaviour
         InstantiatePlayer();
 
         m_swapPlaneCooldown = m_swapPlaneDelay;
-        m_victory = false;
 
         m_availablePlanes.Add(EPlane.Base);
         m_HUD.SetCurrentPlane(EPlane.Base);
@@ -143,8 +143,25 @@ public class WorldComponent : MonoBehaviour
             Application.Quit();
         }
 
-        if (m_playerInstance.IsDead || m_victory)
+        if (m_playerInstance.gameObject.activeSelf)
+        {
+            if (m_playerInstance.IsDead)
+            {
+                m_HUD.SetDefeatTextActive(true);
+                m_playerInstance.gameObject.SetActive(false);
+            }
+
+            if (m_playerInstance.Victory)
+            {
+                m_HUD.SetVictoryTextActive(true);
+                m_playerInstance.gameObject.SetActive(false);
+            }
+        }
+
+        if (m_playerInstance.IsDead || m_playerInstance.Victory)
+        {
             return;
+        }
 
         UpdateInputs();
         UpdateEnemies();
@@ -205,12 +222,35 @@ public class WorldComponent : MonoBehaviour
             m_swapPlaneCooldown -= Time.deltaTime;
             if (m_swapPlaneCooldown <= 0.0f)
             {
-                EPlane newPlane = m_overridenPlane != EPlane.Count ? m_overridenPlane : m_availablePlanes[Random.Range(0, m_availablePlanes.Count)];
+                EPlane newPlane = m_overridenPlane != EPlane.Count ? m_overridenPlane : GetRandomNewPlane();
                 SetCurrentPlane(newPlane);
 
                 m_swapPlaneCooldown = m_swapPlaneDelay;
             }
+            else
+            {
+                m_HUD.UpdateDieRemainingTime(m_swapPlaneCooldown);
+            }
         }
+    }
+
+    EPlane GetRandomNewPlane()
+    {
+        List<EPlane> possiblePlanes = new List<EPlane>();
+        if (m_forceChangePlaneWhenPossible)
+        {
+            foreach (EPlane plane in m_availablePlanes)
+            {
+                if (plane != m_currentPlane)
+                    possiblePlanes.Add(plane);
+            }
+        }
+        else
+        {
+            possiblePlanes.AddRange(m_availablePlanes);
+        }
+
+        return possiblePlanes[Random.Range(0, possiblePlanes.Count)];
     }
 
     void MovePlayer(int moveX, int moveY)
@@ -230,7 +270,7 @@ public class WorldComponent : MonoBehaviour
             return;
         }
 
-        if (!cell.Walkable)
+        if (!cell.Walkable && !m_playerInstance.CheatGhostMode)
             return;
 
         SetCharacterPos(m_playerInstance, cell, false);
@@ -267,8 +307,7 @@ public class WorldComponent : MonoBehaviour
             // check victory condition
             if (cell.Effect == ECellEffect.Victory)
             {
-                m_HUD.SetVictoryTextActive(true);
-                m_victory = true;
+                m_playerInstance.Victory = true;
             }
         }
         else
@@ -281,12 +320,6 @@ public class WorldComponent : MonoBehaviour
 
             // update cell danger
             cell.IsLethal = true;
-        }
-
-        if (m_playerInstance.IsDead)
-        {
-            m_HUD.SetDefeatTextActive(true);
-            m_playerInstance.gameObject.SetActive(false);
         }
     }
 
