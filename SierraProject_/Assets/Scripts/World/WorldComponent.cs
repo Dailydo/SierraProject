@@ -312,6 +312,8 @@ public class WorldComponent : MonoBehaviour
         }
 
         // TODO update tilemap
+
+        Debug.Log("Current plane updated to " + newPlane.ToString());
     }
 
     private void LateUpdate()
