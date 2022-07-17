@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class EnemyComponent : CharacterComponent
 {
+    [SerializeField]
+    private EPlane m_lethalPlane = EPlane.Flesh;
+
     private GridComponent m_grid = null;
     private PlayerComponent m_target = null;
     private Cell m_targetCell = null;
@@ -13,6 +16,11 @@ public class EnemyComponent : CharacterComponent
     public Cell TargetCell
     {
         get { return m_targetCell; }
+    }
+
+    public EPlane LethalPlane
+    {
+        get { return m_lethalPlane; }
     }
 
     public void Init(GridComponent grid, PlayerComponent target)

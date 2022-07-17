@@ -172,24 +172,29 @@ public class WorldComponent : MonoBehaviour
 
     void UpdateInputs()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q) || Input.GetAxis("Horizontal") < -0.5f)
         {
             MovePlayer(-1, 0);
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetAxis("Horizontal") > 0.5f)
         {
             MovePlayer(1, 0);
         }
 
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKey(KeyCode.Z) || Input.GetAxis("Vertical") > 0.5f)
         {
             MovePlayer(0, 1);
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) || Input.GetAxis("Vertical") < -0.5f)
         {
             MovePlayer(0, -1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Joystick1Button0))
+        {
+            TryInteract();
         }
     }
 
@@ -197,7 +202,7 @@ public class WorldComponent : MonoBehaviour
     {
         foreach (EnemyComponent enemy in m_enemiesInstances)
         {
-            if (enemy.CanMove())
+            if (enemy.CanMove() && enemy.gameObject.activeSelf)
             {
                 SetCharacterPos(enemy, enemy.TargetCell, false);
             }
@@ -265,7 +270,7 @@ public class WorldComponent : MonoBehaviour
         if (character == m_playerInstance)
         {
             // check cell danger
-            if (cell.IsLetal)
+            if (cell.IsLethal)
             {
                 m_playerInstance.TakeDamage();
             }
@@ -286,7 +291,7 @@ public class WorldComponent : MonoBehaviour
             }
 
             // update cell danger
-            cell.IsLetal = true;
+            cell.IsLethal = true;
         }
 
         if (m_playerInstance.IsDead)
@@ -301,8 +306,15 @@ public class WorldComponent : MonoBehaviour
         if (character is EnemyComponent)
         {
             // remove cell danger
-            cell.IsLetal = false;
+            cell.IsLethal = false;
         }
+    }
+
+    private void TryInteract()
+    {
+        IngredientComponent closeIngredient = m_grid.GetCloseIngredient(m_playerInstance.PosX, m_playerInstance.PosY);
+        if (closeIngredient != null)
+            closeIngredient.OnInteracted();
     }
 
     private void SetCurrentPlane(EPlane newPlane)
@@ -315,6 +327,15 @@ public class WorldComponent : MonoBehaviour
         foreach (IngredientComponent ingredient in m_ingredients)
         {
             ingredient.SetCurrentPlane(newPlane);
+        }
+
+        foreach (EnemyComponent enemy in m_enemiesInstances)
+        {
+            bool lethal = enemy.LethalPlane == newPlane;
+            Cell enemyCell = m_grid.GetCell(enemy.PosX, enemy.PosY);
+            if (enemyCell != null)
+                enemyCell.IsLethal = lethal;
+            enemy.gameObject.SetActive(lethal);
         }
 
         // TODO update tilemap
